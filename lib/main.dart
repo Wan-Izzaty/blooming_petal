@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'kenali_screen.dart'; // Import your new file
 
 void main() {
   runApp(const BloomingPetalsApp());
@@ -91,7 +92,14 @@ class HomeScreen extends StatelessWidget {
                   menuButton(
                     icon: Icons.favorite,
                     title: "Kenali Haid Anda",
-                    onTap: () {},
+                    onTap: () {
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (context) => const KenaliScreen(),
+                        ),
+                      );
+                    },
                   ),
 
                   menuButton(
