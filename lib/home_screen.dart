@@ -1,8 +1,9 @@
 import 'package:flutter/material.dart';
-import 'kenali_screen.dart';
 
 class HomeScreen extends StatelessWidget {
-  const HomeScreen({super.key});
+  final Function(int index)? onTabChange;
+
+  const HomeScreen({super.key, this.onTabChange});
 
   Widget menuButton({
     required IconData icon,
@@ -15,16 +16,20 @@ class HomeScreen extends StatelessWidget {
         decoration: BoxDecoration(
           color: Colors.white,
           borderRadius: BorderRadius.circular(20),
+          boxShadow: const [
+            BoxShadow(
+              color: Colors.black12,
+              blurRadius: 8,
+              offset: Offset(2, 4),
+            ),
+          ],
         ),
         padding: const EdgeInsets.all(16),
-
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 50, color: Colors.pink),
-
+            Icon(icon, size: 45, color: Colors.pink),
             const SizedBox(height: 10),
-
             Text(
               title,
               textAlign: TextAlign.center,
@@ -39,7 +44,7 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFF8D7DA),
+      backgroundColor: const Color(0xFFFFE6EE),
 
       appBar: AppBar(
         backgroundColor: Colors.pink,
@@ -55,9 +60,18 @@ class HomeScreen extends StatelessWidget {
           children: [
             const SizedBox(height: 10),
 
-            const Text(
-              "Hi, Welcome Back 🌸",
-              style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            Row(
+              children: const [
+                CircleAvatar(
+                  backgroundColor: Colors.white,
+                  child: Icon(Icons.person, color: Colors.pink),
+                ),
+                SizedBox(width: 10),
+                Text(
+                  "Hi, Welcome Back 🌸",
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                ),
+              ],
             ),
 
             const SizedBox(height: 20),
@@ -73,25 +87,24 @@ class HomeScreen extends StatelessWidget {
                     icon: Icons.favorite,
                     title: "Kenali Haid Anda",
                     onTap: () {
-                      Navigator.push(
-                        context,
-                        MaterialPageRoute(
-                          builder: (context) => const KenaliScreen(),
-                        ),
-                      );
+                      onTabChange?.call(1); // ✅ switch to Kenali tab
                     },
                   ),
 
                   menuButton(
                     icon: Icons.menu_book,
                     title: "Panduan Islam",
-                    onTap: () {},
+                    onTap: () {
+                      onTabChange?.call(2); // Islam tab
+                    },
                   ),
 
                   menuButton(
                     icon: Icons.games,
                     title: "Quiz & Game",
-                    onTap: () {},
+                    onTap: () {
+                      onTabChange?.call(3); // Quiz tab
+                    },
                   ),
 
                   menuButton(

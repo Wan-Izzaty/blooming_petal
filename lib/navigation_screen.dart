@@ -14,15 +14,21 @@ class NavigationScreen extends StatefulWidget {
 class _NavigationScreenState extends State<NavigationScreen> {
   int currentIndex = 0;
 
-  final List<Widget> pages = [
-    const HomeScreen(),
-    const KenaliScreen(),
-    const IslamScreen(),
-    const QuizScreen(),
-  ];
-
   @override
   Widget build(BuildContext context) {
+    final List<Widget> pages = [
+      HomeScreen(
+        onTabChange: (index) {
+          setState(() {
+            currentIndex = index;
+          });
+        },
+      ),
+      const KenaliScreen(),
+      const IslamScreen(),
+      const QuizScreen(),
+    ];
+
     return Scaffold(
       body: pages[currentIndex],
 
@@ -36,7 +42,6 @@ class _NavigationScreenState extends State<NavigationScreen> {
         },
 
         type: BottomNavigationBarType.fixed,
-
         backgroundColor: const Color(0xFF8E3B52),
 
         selectedItemColor: Colors.yellow,
@@ -44,11 +49,8 @@ class _NavigationScreenState extends State<NavigationScreen> {
 
         items: const [
           BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-
           BottomNavigationBarItem(icon: Icon(Icons.favorite), label: "Kenali"),
-
           BottomNavigationBarItem(icon: Icon(Icons.menu_book), label: "Islam"),
-
           BottomNavigationBarItem(icon: Icon(Icons.games), label: "Quiz"),
         ],
       ),
