@@ -46,20 +46,14 @@ class HomeScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: const Color(0xFFFFE6EE),
 
-      appBar: AppBar(
-        backgroundColor: Colors.pink,
-        title: const Text("Blooming Petals"),
-      ),
-
+      // ❌ Saya buka AppBar kat sini ikut citarasa awak tadi kalau nak bersih,
+      // tapi kalau nak kekalkan, tak apa biar je.
       body: Padding(
         padding: const EdgeInsets.all(16),
-
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
-
           children: [
-            const SizedBox(height: 10),
-
+            const SizedBox(height: 40), // Tambah jarak atas sikit
             Row(
               children: const [
                 CircleAvatar(
@@ -73,40 +67,34 @@ class HomeScreen extends StatelessWidget {
                 ),
               ],
             ),
-
-            const SizedBox(height: 20),
-
+            const SizedBox(height: 30),
             Expanded(
               child: GridView.count(
                 crossAxisCount: 2,
                 crossAxisSpacing: 15,
                 mainAxisSpacing: 15,
-
                 children: [
                   menuButton(
                     icon: Icons.favorite,
                     title: "Kenali Haid Anda",
                     onTap: () {
-                      onTabChange?.call(1); // ✅ switch to Kenali tab
+                      onTabChange?.call(1); // ✅ Pindah ke tab 1 (Kenali)
                     },
                   ),
-
                   menuButton(
                     icon: Icons.menu_book,
                     title: "Panduan Islam",
                     onTap: () {
-                      onTabChange?.call(2); // Islam tab
+                      onTabChange?.call(2); // ✅ Pindah ke tab 2 (Islam)
                     },
                   ),
-
                   menuButton(
                     icon: Icons.games,
                     title: "Quiz & Game",
                     onTap: () {
-                      onTabChange?.call(3); // Quiz tab
+                      onTabChange?.call(3); // ✅ Pindah ke tab 3 (Quiz)
                     },
                   ),
-
                   menuButton(
                     icon: Icons.settings,
                     title: "Tetapan",

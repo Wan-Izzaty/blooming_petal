@@ -17,6 +17,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> pages = [
+      // Bila kat sini, kita hantar fungsi tukar page ke HomeScreen
       HomeScreen(
         onTabChange: (index) {
           setState(() {
@@ -32,28 +33,33 @@ class _NavigationScreenState extends State<NavigationScreen> {
     return Scaffold(
       body: pages[currentIndex],
 
-      bottomNavigationBar: BottomNavigationBar(
-        currentIndex: currentIndex,
-
-        onTap: (index) {
-          setState(() {
-            currentIndex = index;
-          });
-        },
-
-        type: BottomNavigationBarType.fixed,
-        backgroundColor: const Color(0xFF8E3B52),
-
-        selectedItemColor: Colors.yellow,
-        unselectedItemColor: Colors.white,
-
-        items: const [
-          BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
-          BottomNavigationBarItem(icon: Icon(Icons.favorite), label: "Kenali"),
-          BottomNavigationBarItem(icon: Icon(Icons.menu_book), label: "Islam"),
-          BottomNavigationBarItem(icon: Icon(Icons.games), label: "Quiz"),
-        ],
-      ),
+      // ✅ LOGIK PENTING: Navigation bar hanya muncul jika BUKAN page 0 (Home)
+      bottomNavigationBar: currentIndex == 0
+          ? null // Kalau kat Home, bar jadi tiada
+          : BottomNavigationBar(
+              currentIndex: currentIndex,
+              onTap: (index) {
+                setState(() {
+                  currentIndex = index;
+                });
+              },
+              type: BottomNavigationBarType.fixed,
+              backgroundColor: const Color(0xFF8E3B52), // Warna maroon awak
+              selectedItemColor: Colors.yellow,
+              unselectedItemColor: Colors.white,
+              items: const [
+                BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.favorite),
+                  label: "Kenali",
+                ),
+                BottomNavigationBarItem(
+                  icon: Icon(Icons.menu_book),
+                  label: "Islam",
+                ),
+                BottomNavigationBarItem(icon: Icon(Icons.games), label: "Quiz"),
+              ],
+            ),
     );
   }
 }
