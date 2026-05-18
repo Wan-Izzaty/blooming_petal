@@ -36,7 +36,7 @@ class KenaliScreen extends StatelessWidget {
           _buildTopicCard(
             context,
             "Jenis produk haid",
-            "assets/images/products.png",
+            "assets/images/Period Products.png",
             "Penerangan pasal produk...",
             false,
           ),
