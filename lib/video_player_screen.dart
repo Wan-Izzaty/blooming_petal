@@ -4,6 +4,7 @@ import 'package:video_player/video_player.dart';
 class VideoPlayerScreen extends StatefulWidget {
   final String title;
   final String videoPath;
+  final String imagePath;
   final String description;
   final bool isVideo;
 
@@ -11,6 +12,7 @@ class VideoPlayerScreen extends StatefulWidget {
     super.key,
     required this.title,
     required this.videoPath,
+    required this.imagePath,
     required this.description,
     this.isVideo = false,
   });
@@ -26,7 +28,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   @override
   void initState() {
     super.initState();
-    // Hanya buat controller JIKA isVideo = TRUE DAN path tak kosong
     if (widget.isVideo && widget.videoPath.isNotEmpty) {
       _controller = VideoPlayerController.asset(widget.videoPath)
         ..initialize().then((_) {
@@ -47,12 +48,23 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: const Color(0xFFFFE6EE),
-      appBar: AppBar(title: Text(widget.title), backgroundColor: Colors.pink),
+      appBar: AppBar(
+        title: Text(
+          widget.title,
+          style: const TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+          ),
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        iconTheme: const IconThemeData(color: Colors.black),
+      ),
       body: SingleChildScrollView(
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.stretch,
           children: [
-            // 🎥 BAHAGIAN VIDEO - HANYA MUNCUL JIKA ADA VIDEO
+            // 🎥 VIDEO AREA
             if (widget.isVideo && _controller != null)
               Container(
                 margin: const EdgeInsets.all(15),
@@ -67,8 +79,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                             aspectRatio: _controller!.value.aspectRatio,
                             child: VideoPlayer(_controller!),
                           ),
-
-                          // 📉 BAHAGIAN YANG ERROR TADI - DAH DIPERBAIKI
                           Row(
                             mainAxisAlignment: MainAxisAlignment.center,
                             children: [
@@ -89,18 +99,20 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                                 },
                               ),
                               Expanded(
-                                child: VideoProgressIndicator(
-                                  _controller!, // ✅ Sekarang selamat sebab dah cek _controller != null kat atas
-                                  allowScrubbing: true,
-                                  colors: const VideoProgressColors(
-                                    playedColor: Colors.pink,
-                                    backgroundColor: Colors.grey,
+                                child: Padding(
+                                  padding: const EdgeInsets.all(15.0),
+                                  child: VideoProgressIndicator(
+                                    _controller!,
+                                    allowScrubbing: true,
+                                    colors: const VideoProgressColors(
+                                      playedColor: Colors.pink,
+                                      backgroundColor: Colors.grey,
+                                    ),
                                   ),
                                 ),
                               ),
                             ],
                           ),
-                          // --- TAMAT ---
                         ],
                       )
                     : const SizedBox(
@@ -110,25 +122,72 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                         ),
                       ),
               )
-            // 🖼️ BAHAGIAN GAMBAR / TEMPAT KOSONG
+            // 🖼️ INFOGRAPHIC AREA (FIXED)
             else
               Container(
-                height: 180,
-                margin: const EdgeInsets.all(15),
+                margin: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 10,
+                ),
+                height: 380,
                 decoration: BoxDecoration(
                   color: Colors.white,
-                  borderRadius: BorderRadius.circular(15),
+                  borderRadius: BorderRadius.circular(20),
+                  boxShadow: const [
+                    BoxShadow(color: Colors.black12, blurRadius: 6),
+                  ],
                 ),
-                child: const Icon(Icons.image, size: 80, color: Colors.pink),
+                // ClipRRect keeps the image corners rounded matching the container
+                child: ClipRRect(
+                  borderRadius: BorderRadius.circular(15),
+                  child: InteractiveViewer(
+                    panEnabled: true,
+                    minScale: 1.0,
+                    maxScale: 4.0, // Allows users to zoom in up to 4x
+                    child: Center(
+                      child: Padding(
+                        padding: const EdgeInsets.all(
+                          12.0,
+                        ), // Adds a clean inner border
+                        child: Image.asset(
+                          widget.imagePath,
+                          fit: BoxFit
+                              .contain, // 👈 Ensures the image shrinks neatly inside the 380 height
+                          errorBuilder: (context, error, stackTrace) {
+                            return const Column(
+                              mainAxisAlignment: MainAxisAlignment.center,
+                              children: [
+                                Icon(
+                                  Icons.broken_image,
+                                  size: 50,
+                                  color: Colors.grey,
+                                ),
+                                SizedBox(height: 10),
+                                Text(
+                                  "Gambar tidak dijumpai",
+                                  style: TextStyle(color: Colors.grey),
+                                ),
+                              ],
+                            );
+                          },
+                        ),
+                      ),
+                    ),
+                  ),
+                ),
               ),
 
-            // 📖 TEKS PENERANGAN
+            // 📖 DESCRIPTION TEXT
             Padding(
               padding: const EdgeInsets.symmetric(horizontal: 20, vertical: 15),
               child: Text(
                 widget.description,
                 textAlign: TextAlign.justify,
-                style: const TextStyle(fontSize: 16, height: 1.5),
+                style: const TextStyle(
+                  fontSize: 16,
+                  height: 1.5,
+                  color: Colors.black87,
+                ),
               ),
             ),
           ],

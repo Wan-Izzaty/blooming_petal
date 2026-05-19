@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
-import 'video_player_screen.dart'; // ✅ PENTING: Import fail video
+import 'background_screen.dart'; // Import background bunga
+import 'video_player_screen.dart'; // Import skrin video
 
 class KenaliScreen extends StatelessWidget {
   const KenaliScreen({super.key});
@@ -7,115 +8,142 @@ class KenaliScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFCE4EC),
+      backgroundColor: const Color(0xFFFFE6EE),
       appBar: AppBar(
-        title: const Text("Kenali Haid Anda"),
-        backgroundColor: Colors.pink,
+        title: const Text(
+          "Kenali haid Anda",
+          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+        ),
+        backgroundColor: Colors.transparent,
+        elevation: 0,
+        iconTheme: const IconThemeData(color: Colors.black),
       ),
-      body: GridView.count(
-        padding: const EdgeInsets.all(15),
-        crossAxisCount: 2,
-        crossAxisSpacing: 15,
-        mainAxisSpacing: 15,
-        children: [
-          // ✅ SENARAI KOTAK - Betulkan path ikut folder assets awak
-          _buildTopicCard(
-            context,
-            "Emosi ketika haid",
-            "assets/images/emotion.png", // Lokasi gambar
-            "Ini adalah penerangan panjang pasal emosi wanita ketika haid...",
-            false, // <<--- FALSE = Bukan video
-          ),
-          _buildTopicCard(
-            context,
-            "Apa itu kitaran haid",
-            "assets/videos/cycle_video.mp4", // Lokasi video
-            "Penerangan pasal kitaran haid...",
-            true, // <<--- TRUE = Ada video
-          ),
-          _buildTopicCard(
-            context,
-            "Jenis produk haid",
-            "assets/images/Period Products.png",
-            "Penerangan pasal produk...",
-            false,
-          ),
-          _buildTopicCard(
-            context,
-            "Kebersihan semasa haid",
-            "assets/images/hygiene.png",
-            "Penerangan pasal kebersihan...",
-            false,
-          ),
-          _buildTopicCard(
-            context,
-            "Makanan patut/tidak patut",
-            "assets/images/food.png",
-            "Senarai makanan yang elok dan tidak elok dimakan...",
-            false,
-          ),
-          _buildTopicCard(
-            context,
-            "Penjagaan haid",
-            "assets/videos/penjagaan kebersihan ketika haid.mp4",
-            "Cara menjaga diri semasa haid...",
-            true,
-          ),
-        ],
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          children: [
+            // Bahagian Search Bar (Macam dalam gambar awak)
+            Container(
+              padding: const EdgeInsets.symmetric(horizontal: 15),
+              decoration: BoxDecoration(
+                color: Colors.white,
+                borderRadius: BorderRadius.circular(30),
+                border: Border.all(color: Colors.grey.shade300),
+              ),
+              child: const TextField(
+                decoration: InputDecoration(
+                  hintText: "Cari panduan...",
+                  border: InputBorder.none,
+                  suffixIcon: Icon(Icons.search),
+                ),
+              ),
+            ),
+            const SizedBox(height: 20),
+
+            // Grid 6 Kotak Panduan
+            Expanded(
+              child: GridView.count(
+                crossAxisCount: 2,
+                crossAxisSpacing: 15,
+                mainAxisSpacing: 15,
+                children: [
+                  _buildMenuCard(
+                    context,
+                    "Emosi ketika haid",
+                    "assets/images/emotion.png",
+                    "Penerangan emosi ketika haid...",
+                    false,
+                  ),
+
+                  // ✅ KHAS UNTUK MANDI WAJIB (Ada Video)
+                  _buildMenuCard(
+                    context,
+                    "Apa itu kitaran haid",
+                    "assets/images/kiataran_haid.png",
+                    "Kitaran haid ialah...",
+                    true, // TRUE sebab ada video
+                    videoPath: "assets/videos/kitaran_haid.mp4",
+                  ),
+
+                  _buildMenuCard(
+                    context,
+                    "Jenis produk haid",
+                    "assets/infographics/period_products.jpg",
+                    "Berikut adalah jenis-jenis produk...",
+                    false,
+                  ),
+                  _buildMenuCard(
+                    context,
+                    "kebersihan ketika haid",
+                    "assets/images/penjagaan.png",
+                    "Penerangan tentang penjagaan...",
+                    true, // TRUE sebab ada video
+                    videoPath: "assets/videos/penjagaan_kebersihan.mp4",
+                  ),
+                  _buildMenuCard(
+                    context,
+                    "Makanan semasa haid",
+                    "assets/infographics/food_during_period.jpg",
+                    "Penerangan tentang makanan yang patut dielakkan dan patut dimakan..",
+                    false,
+                  ),
+                  _buildMenuCard(
+                    context,
+                    "Perubahan badan setelah haid",
+                    "assets/images/berubah.png",
+                    "Kenapa badan kita berubah...",
+                    false,
+                  ),
+                ],
+              ),
+            ),
+          ],
+        ),
       ),
     );
   }
 
-  // ✅ FUNGSI BINA KOTAK
-  Widget _buildTopicCard(
+  // Fungsi untuk bina kotak menu
+  Widget _buildMenuCard(
     BuildContext context,
     String title,
-    String path,
-    String description,
-    bool isVideo, // ✅ Parameter ni WAJIB ADA
-  ) {
+    String imagePath,
+    String desc,
+    bool isVideo, {
+    String videoPath = "",
+  }) {
     return GestureDetector(
       onTap: () {
-        // ✅ BILA KLIK: Pindah skrin & hantar SEMUA data
         Navigator.push(
           context,
           MaterialPageRoute(
             builder: (context) => VideoPlayerScreen(
               title: title,
-              videoPath: path,
-              description: description,
-              isVideo: isVideo, // ✅ Hantar nilai ke skrin video
+              description: desc,
+              videoPath: videoPath,
+              imagePath: imagePath,
+              isVideo: isVideo,
             ),
           ),
         );
       },
+
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(15),
-          boxShadow: const [BoxShadow(color: Colors.black12, blurRadius: 2)],
+          borderRadius: BorderRadius.circular(20),
+          boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)],
         ),
         child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Expanded(
-              child: isVideo
-                  ? const Icon(
-                      Icons.play_circle_fill,
-                      size: 50,
-                      color: Colors.pink,
-                    )
-                  : Image.asset(path, fit: BoxFit.cover), // ✅ Papar gambar
-            ),
-            Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(
-                title,
-                textAlign: TextAlign.center,
-                style: const TextStyle(
-                  fontSize: 12,
-                  fontWeight: FontWeight.w500,
-                ),
-              ),
+            // Ganti dengan Image.asset(imagePath) bila gambar dah ada
+            const Icon(Icons.local_florist, size: 50, color: Colors.pink),
+            const SizedBox(height: 10),
+            Text(
+              title,
+              textAlign: TextAlign.center,
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
             ),
           ],
         ),
