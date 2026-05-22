@@ -53,8 +53,8 @@ class KenaliScreen extends StatelessWidget {
                       context,
                       "Emosi ketika haid",
                       [
-                        "assets/images/emosi1_haid.png",
-                        "assets/images/emosi2_haid.png",
+                        "assets/infographics/emosi1_haid.jpg",
+                        "assets/infographics/emosi2_haid.jpg",
                       ],
                       "Penerangan emosi ketika haid...",
                       false,
@@ -88,7 +88,10 @@ class KenaliScreen extends StatelessWidget {
                     _buildMenuCard(
                       context,
                       "Makanan semasa haid",
-                      "assets/infographics/food_during_period.jpg",
+                      [
+                        "assets/infographics/makanan1_haid.jpg",
+                        "assets/infographics/makanan2_haid.jpg",
+                      ],
                       "Penerangan tentang makanan yang patut dielakkan dan patut dimakan..",
                       false,
                     ),

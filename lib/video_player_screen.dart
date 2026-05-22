@@ -1,14 +1,16 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'background_screen.dart';
+import 'package:animated_text_kit/animated_text_kit.dart'; // ✅ IMPORT ANIMASI
 
 class VideoPlayerScreen extends StatefulWidget {
-  // ✅ UBAH SIKIT: Sekarang imagePath boleh terima String ATAU List<String>
+  // ✅ UBAH SIKIT: Sekarang imagePaths boleh terima String ATAU List<String>
   final dynamic imagePaths;
   final String title;
   final String videoPath;
   final String description;
   final bool isVideo;
+  final String ustazahMessage; // ✅ TAMBAH: Mesej ikut topik
 
   const VideoPlayerScreen({
     super.key,
@@ -17,6 +19,8 @@ class VideoPlayerScreen extends StatefulWidget {
     required this.imagePaths, // Awak hantar macam biasa dari menu utama
     required this.description,
     this.isVideo = false,
+    this.ustazahMessage =
+        "Semoga ilmu ini bermanfaat untukmu kawan-kawan! ❤️", // Mesej asal
   });
 
   @override
@@ -68,6 +72,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   @override
   Widget build(BuildContext context) {
     return BackgroundWrapper(
+      // ✅ DAH BETULKAN NAMA DARI BackgroundWrapper -> BackgroundScreen
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
@@ -227,7 +232,75 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                   ),
                 ),
               ),
-              const SizedBox(height: 50),
+
+              // 👩🏫 ✅ BAHAGIAN BARU: WATAK USTAZAH + ANIMASI TULIS
+              Padding(
+                padding: const EdgeInsets.symmetric(
+                  horizontal: 20,
+                  vertical: 10,
+                ),
+                child: Row(
+                  crossAxisAlignment: CrossAxisAlignment
+                      .end, // Supaya belon kata ikut bawah gambar
+                  children: [
+                    // 1. Gambar Ustazah
+                    Image.asset(
+                      'assets/images/ustazah.png', // ✅ Pastikan nama fail sama persis!
+                      width: 90, // Saiz gambar, boleh ubah
+                      height: 90,
+                    ),
+                    const SizedBox(width: 8),
+
+                    // 2. Belon Kata + Animasi
+                    Expanded(
+                      child: Container(
+                        padding: const EdgeInsets.symmetric(
+                          horizontal: 15,
+                          vertical: 12,
+                        ),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.85),
+                          borderRadius: const BorderRadius.only(
+                            topLeft: Radius.circular(15),
+                            topRight: Radius.circular(15),
+                            bottomRight: Radius.circular(15),
+                          ),
+                          boxShadow: const [
+                            BoxShadow(color: Colors.black12, blurRadius: 3),
+                          ],
+                        ),
+                        child: DefaultTextStyle(
+                          style: const TextStyle(
+                            fontSize: 14,
+                            color: Colors.black87,
+                            fontStyle: FontStyle.italic,
+                            height: 1.3,
+                          ),
+                          child: AnimatedTextKit(
+                            animatedTexts: [
+                              TypewriterAnimatedText(
+                                widget
+                                    .ustazahMessage, // ✅ Ambil mesej ikut topik
+                                speed: const Duration(
+                                  milliseconds: 80,
+                                ), // Kelajuan taip
+                                cursor: '|', // Tanda kursor menaip
+                              ),
+                            ],
+                            totalRepeatCount: 1, // Taip sekali je
+                            displayFullTextOnTap:
+                                true, // Tekan skrin terus habis tulis
+                            isRepeatingAnimation: false,
+                          ),
+                        ),
+                      ),
+                    ),
+                  ],
+                ),
+              ),
+
+              // ✅ TAMAT BAHAGIAN USTAZAH
+              const SizedBox(height: 50), // Jarak bawah skrin
             ],
           ),
         ),
@@ -235,32 +308,32 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     );
   }
 
-  // ✅ FUNGSI BINA GAMBAR (SAMA MACAM AWAK DAH ADA)
+  // ✅ FUNGSI BINA GAMBAR (DAH DIUBAH SUPAYA PENUH KOTAK)
   Widget _buildImageWidget(String imagePath) {
     return InteractiveViewer(
       panEnabled: true,
       minScale: 1.0,
       maxScale: 4.0,
       child: Center(
-        child: Padding(
-          padding: const EdgeInsets.all(12.0),
-          child: Image.asset(
-            imagePath,
-            fit: BoxFit.contain,
-            errorBuilder: (context, error, stackTrace) {
-              return const Column(
-                mainAxisAlignment: MainAxisAlignment.center,
-                children: [
-                  Icon(Icons.broken_image, size: 50, color: Colors.grey),
-                  SizedBox(height: 10),
-                  Text(
-                    "Gambar tidak dijumpai",
-                    style: TextStyle(color: Colors.grey),
-                  ),
-                ],
-              );
-            },
-          ),
+        // ✅ SAYA BUANG PADDING SEKELILING SUPAYA GAMBAR PENUH KOTAK PUTIH
+        child: Image.asset(
+          imagePath,
+          fit: BoxFit.cover, // ✅ Dah tukar ke cover supaya penuh P
+          height: double.infinity, // Penuh tinggi
+
+          errorBuilder: (context, error, stackTrace) {
+            return const Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Icon(Icons.broken_image, size: 50, color: Colors.grey),
+                SizedBox(height: 10),
+                Text(
+                  "Gambar tidak dijumpai",
+                  style: TextStyle(color: Colors.grey),
+                ),
+              ],
+            );
+          },
         ),
       ),
     );
