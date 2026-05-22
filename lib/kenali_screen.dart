@@ -8,7 +8,6 @@ class KenaliScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFE6EE),
       appBar: AppBar(
         title: const Text(
           "Kenali haid Anda",
@@ -18,86 +17,90 @@ class KenaliScreen extends StatelessWidget {
         elevation: 0,
         iconTheme: const IconThemeData(color: Colors.black),
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          children: [
-            // Bahagian Search Bar (Macam dalam gambar awak)
-            Container(
-              padding: const EdgeInsets.symmetric(horizontal: 15),
-              decoration: BoxDecoration(
-                color: Colors.white,
-                borderRadius: BorderRadius.circular(30),
-                border: Border.all(color: Colors.grey.shade300),
-              ),
-              child: const TextField(
-                decoration: InputDecoration(
-                  hintText: "Cari panduan...",
-                  border: InputBorder.none,
-                  suffixIcon: Icon(Icons.search),
+      body: BackgroundWrapper(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            children: [
+              // Bahagian Search Bar
+              Container(
+                padding: const EdgeInsets.symmetric(horizontal: 15),
+                decoration: BoxDecoration(
+                  color: Colors.white.withOpacity(
+                    0.85,
+                  ), // Opacity sikit nampak cantik atas bunga
+                  borderRadius: BorderRadius.circular(30),
+                  border: Border.all(color: Colors.grey.shade300),
+                ),
+                child: const TextField(
+                  decoration: InputDecoration(
+                    hintText: "Cari panduan...",
+                    border: InputBorder.none,
+                    suffixIcon: Icon(Icons.search),
+                  ),
                 ),
               ),
-            ),
-            const SizedBox(height: 20),
+              const SizedBox(height: 20),
 
-            // Grid 6 Kotak Panduan
-            Expanded(
-              child: GridView.count(
-                crossAxisCount: 2,
-                crossAxisSpacing: 15,
-                mainAxisSpacing: 15,
-                children: [
-                  _buildMenuCard(
-                    context,
-                    "Emosi ketika haid",
-                    "assets/images/emotion.png",
-                    "Penerangan emosi ketika haid...",
-                    false,
-                  ),
+              // Grid 6 Kotak Panduan
+              Expanded(
+                child: GridView.count(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 15,
+                  mainAxisSpacing: 15,
+                  children: [
+                    _buildMenuCard(
+                      context,
+                      "Emosi ketika haid",
+                      "assets/images/emotion.png",
+                      "Penerangan emosi ketika haid...",
+                      false,
+                    ),
 
-                  // ✅ KHAS UNTUK MANDI WAJIB (Ada Video)
-                  _buildMenuCard(
-                    context,
-                    "Apa itu kitaran haid",
-                    "assets/images/kiataran_haid.png",
-                    "Kitaran haid ialah...",
-                    true, // TRUE sebab ada video
-                    videoPath: "assets/videos/kitaran_haid.mp4",
-                  ),
+                    // ✅ KHAS UNTUK MANDI WAJIB (Ada Video)
+                    _buildMenuCard(
+                      context,
+                      "Apa itu kitaran haid",
+                      "assets/images/kiataran_haid.png",
+                      "Kitaran haid ialah...",
+                      true, // TRUE sebab ada video
+                      videoPath: "assets/videos/kitaran_haid.mp4",
+                    ),
 
-                  _buildMenuCard(
-                    context,
-                    "Jenis produk haid",
-                    "assets/infographics/period_products.jpg",
-                    "Berikut adalah jenis-jenis produk...",
-                    false,
-                  ),
-                  _buildMenuCard(
-                    context,
-                    "kebersihan ketika haid",
-                    "assets/images/penjagaan.png",
-                    "Penerangan tentang penjagaan...",
-                    true, // TRUE sebab ada video
-                    videoPath: "assets/videos/penjagaan_kebersihan.mp4",
-                  ),
-                  _buildMenuCard(
-                    context,
-                    "Makanan semasa haid",
-                    "assets/infographics/food_during_period.jpg",
-                    "Penerangan tentang makanan yang patut dielakkan dan patut dimakan..",
-                    false,
-                  ),
-                  _buildMenuCard(
-                    context,
-                    "Perubahan badan setelah haid",
-                    "assets/images/berubah.png",
-                    "Kenapa badan kita berubah...",
-                    false,
-                  ),
-                ],
+                    _buildMenuCard(
+                      context,
+                      "Jenis produk haid",
+                      "assets/infographics/period_products.jpg",
+                      "Berikut adalah jenis-jenis produk...",
+                      false,
+                    ),
+                    _buildMenuCard(
+                      context,
+                      "kebersihan ketika haid",
+                      "assets/images/penjagaan.png",
+                      "Penerangan tentang penjagaan...",
+                      true, // TRUE sebab ada video
+                      videoPath: "assets/videos/penjagaan_kebersihan.mp4",
+                    ),
+                    _buildMenuCard(
+                      context,
+                      "Makanan semasa haid",
+                      "assets/infographics/food_during_period.jpg",
+                      "Penerangan tentang makanan yang patut dielakkan dan patut dimakan..",
+                      false,
+                    ),
+                    _buildMenuCard(
+                      context,
+                      "Perubahan badan setelah haid",
+                      "assets/images/berubah.png",
+                      "Kenapa badan kita berubah...",
+                      false,
+                    ),
+                  ],
+                ),
               ),
-            ),
-          ],
+            ],
+          ),
         ),
       ),
     );
@@ -130,7 +133,7 @@ class KenaliScreen extends StatelessWidget {
 
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.white.withOpacity(0.8),
           borderRadius: BorderRadius.circular(20),
           boxShadow: [BoxShadow(color: Colors.black12, blurRadius: 5)],
         ),

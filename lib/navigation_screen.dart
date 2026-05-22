@@ -57,7 +57,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
                   icon: Icon(Icons.menu_book),
                   label: "Islam",
                 ),
-                BottomNavigationBarItem(icon: Icon(Icons.games), label: "Quiz"),
+                BottomNavigationBarItem(icon: Icon(Icons.games), label: "Kuiz"),
               ],
             ),
     );

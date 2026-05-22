@@ -16,44 +16,60 @@ class BackgroundWrapper extends StatelessWidget {
             top: -20,
             left: -20,
             child: Opacity(
-              opacity: 0.25, // Pudar sikit supaya tak ganggu baca tulisan
-              child: Icon(
-                Icons.local_florist, // Icon bunga
-                size: 180,
-                color: Colors.pink.shade300,
+              opacity: 0.65, // Pudar sikit supaya tak ganggu baca tulisan
+              child: Image.asset(
+                'assets/images/flower1.png', // 🔴 TUKAR NAMA SAMA PERSIS DENGAN FAIL AWAK
+                width: 180, // Saiz bunga
+                fit: BoxFit.contain,
               ),
             ),
           ),
 
-          // 🌸 Bunga Kanan Bawah - Guna Icon
+          // 🌸 2. BUNGA ATAS KANAN
           Positioned(
-            bottom: -20,
+            top: 30,
+            right: -30,
+            child: Opacity(
+              opacity: 0.65,
+              child: Image.asset(
+                'assets/images/flower2.png', // 🔴 TUKAR NAMA AWAK
+                width: 150,
+                fit: BoxFit.contain,
+              ),
+            ),
+          ),
+
+          // 🌸 3. BUNGA BAWAH KIRI
+          Positioned(
+            bottom: 50, // Tinggikan sikit supaya tak tutup navigation bar
+            left: -10,
+            child: Opacity(
+              opacity: 0.95,
+              child: Image.asset(
+                'assets/images/flower3.png', // 🔴 TUKAR NAMA AWAK
+                width: 160,
+                fit: BoxFit.contain,
+              ),
+            ),
+          ),
+
+          // 🌸 4. BUNGA BAWAH KANAN
+          Positioned(
+            bottom:
+                80, // JANGAN JATUH SANGAT! Tinggikan sebab nak letak Navigation Bar
             right: -20,
             child: Opacity(
-              opacity: 0.25,
-              child: Icon(
-                Icons.local_florist,
-                size: 150,
-                color: Colors.pink.shade300,
+              opacity: 0.65,
+              child: Image.asset(
+                'assets/images/flower4.png', // 🔴 TUKAR NAMA AWAK
+                width: 200,
+                fit: BoxFit.contain,
               ),
             ),
           ),
 
-          // 🌸 Bunga Kecil Tambahan (macam dalam contoh awak)
-          Positioned(
-            top: 80,
-            right: 30,
-            child: Opacity(
-              opacity: 0.2,
-              child: Icon(
-                Icons.favorite, // Boleh tukar ikon lain kalau nak
-                size: 50,
-                color: Colors.pink.shade200,
-              ),
-            ),
-          ),
-
-          // 📱 KANDUNGAN UTAMA
+          // 📱 ISI KANDUNGAN AWAK (Menu / Teks / Grid)
+          // Kita guna SafeArea supaya tulisan tak tertindan dengan bunga atau status bar
           SafeArea(child: child),
         ],
       ),

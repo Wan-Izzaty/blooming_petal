@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'background_screen.dart';
+import 'background_screen.dart'; // ✅ IMPORT LATAR BELAKANG BUNGA
 
 class HomeScreen extends StatelessWidget {
   final Function(int index)? onTabChange;
@@ -14,8 +14,11 @@ class HomeScreen extends StatelessWidget {
     return GestureDetector(
       onTap: onTap,
       child: Container(
+        // ✅ Saya tambah Opacity sikit supaya bunga belakang nampak, nampak lagi cantik
         decoration: BoxDecoration(
-          color: Colors.white,
+          color: Colors.white.withOpacity(
+            0.85,
+          ), // ❤️ Nilaian ni boleh ubah 0.8 - 1.0
           borderRadius: BorderRadius.circular(20),
           boxShadow: const [
             BoxShadow(
@@ -45,66 +48,76 @@ class HomeScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      backgroundColor: const Color(0xFFFFE6EE),
+      // ❌ Tak ada AppBar, bersih macam awak nak
 
-      // ❌ Saya buka AppBar kat sini ikut citarasa awak tadi kalau nak bersih,
-      // tapi kalau nak kekalkan, tak apa biar je.
-      body: Padding(
-        padding: const EdgeInsets.all(16),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            const SizedBox(height: 40), // Tambah jarak atas sikit
-            Row(
-              children: const [
-                CircleAvatar(
-                  backgroundColor: Colors.white,
-                  child: Icon(Icons.person, color: Colors.pink),
-                ),
-                SizedBox(width: 10),
-                Text(
-                  "Hi, Welcome Back 🌸",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-                ),
-              ],
-            ),
-            const SizedBox(height: 30),
-            Expanded(
-              child: GridView.count(
-                crossAxisCount: 2,
-                crossAxisSpacing: 15,
-                mainAxisSpacing: 15,
-                children: [
-                  menuButton(
-                    icon: Icons.favorite,
-                    title: "Kenali Haid Anda",
-                    onTap: () {
-                      onTabChange?.call(1); // ✅ Pindah ke tab 1 (Kenali)
-                    },
+      // ✅ BAHAGIAN PENTING: BALUT SEMUA DENGAN BackgroundScreen
+      body: BackgroundWrapper(
+        child: Padding(
+          padding: const EdgeInsets.all(16),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              const SizedBox(height: 40), // Jarak dari atas skrin
+              // Bahagian Hi User
+              Row(
+                children: const [
+                  CircleAvatar(
+                    // Ikut gaya kotak
+                    child: Icon(Icons.person, color: Colors.pink),
                   ),
-                  menuButton(
-                    icon: Icons.menu_book,
-                    title: "Panduan Islam",
-                    onTap: () {
-                      onTabChange?.call(2); // ✅ Pindah ke tab 2 (Islam)
-                    },
-                  ),
-                  menuButton(
-                    icon: Icons.games,
-                    title: "Quiz & Game",
-                    onTap: () {
-                      onTabChange?.call(3); // ✅ Pindah ke tab 3 (Quiz)
-                    },
-                  ),
-                  menuButton(
-                    icon: Icons.settings,
-                    title: "Tetapan",
-                    onTap: () {},
+                  SizedBox(width: 10),
+                  Text(
+                    "Hi, Welcome Back 🌸",
+                    style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
                   ),
                 ],
               ),
-            ),
-          ],
+              const SizedBox(height: 30),
+
+              // Grid Menu
+              Expanded(
+                child: GridView.count(
+                  crossAxisCount: 2,
+                  crossAxisSpacing: 15,
+                  mainAxisSpacing: 15,
+                  children: [
+                    menuButton(
+                      icon: Icons.favorite,
+                      title: "Kenali Haid Anda",
+                      onTap: () {
+                        onTabChange?.call(
+                          1,
+                        ); // ✅ Fungsi tukar tab JALAN MACAM BIASA
+                      },
+                    ),
+                    menuButton(
+                      icon: Icons.menu_book,
+                      title: "Panduan Islam",
+                      onTap: () {
+                        onTabChange?.call(
+                          2,
+                        ); // ✅ Fungsi tukar tab JALAN MACAM BIASA
+                      },
+                    ),
+                    menuButton(
+                      icon: Icons.games,
+                      title: "Kuiz",
+                      onTap: () {
+                        onTabChange?.call(
+                          3,
+                        ); // ✅ Fungsi tukar tab JALAN MACAM BIASA
+                      },
+                    ),
+                    menuButton(
+                      icon: Icons.settings,
+                      title: "Tetapan",
+                      onTap: () {},
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );
