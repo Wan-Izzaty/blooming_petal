@@ -110,7 +110,7 @@ class IslamScreen extends StatelessWidget {
   Widget _buildMenuCard(
     BuildContext context,
     String title,
-    String imagePath,
+    dynamic imagePaths,
     String desc,
     bool isVideo, {
     String videoPath = "",
@@ -124,7 +124,7 @@ class IslamScreen extends StatelessWidget {
               title: title,
               description: desc,
               videoPath: videoPath,
-              imagePath: imagePath,
+              imagePaths: imagePaths,
               isVideo: isVideo,
             ),
           ),

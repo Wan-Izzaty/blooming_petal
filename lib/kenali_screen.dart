@@ -52,7 +52,10 @@ class KenaliScreen extends StatelessWidget {
                     _buildMenuCard(
                       context,
                       "Emosi ketika haid",
-                      "assets/images/emotion.png",
+                      [
+                        "assets/images/emosi1_haid.png",
+                        "assets/images/emosi2_haid.png",
+                      ],
                       "Penerangan emosi ketika haid...",
                       false,
                     ),
@@ -110,7 +113,7 @@ class KenaliScreen extends StatelessWidget {
   Widget _buildMenuCard(
     BuildContext context,
     String title,
-    String imagePath,
+    dynamic imagePaths,
     String desc,
     bool isVideo, {
     String videoPath = "",
@@ -124,7 +127,7 @@ class KenaliScreen extends StatelessWidget {
               title: title,
               description: desc,
               videoPath: videoPath,
-              imagePath: imagePath,
+              imagePaths: imagePaths,
               isVideo: isVideo,
             ),
           ),

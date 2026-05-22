@@ -3,9 +3,10 @@ import 'package:video_player/video_player.dart';
 import 'background_screen.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
+  // ✅ UBAH SIKIT: Sekarang imagePath boleh terima String ATAU List<String>
+  final dynamic imagePaths;
   final String title;
   final String videoPath;
-  final String imagePath;
   final String description;
   final bool isVideo;
 
@@ -13,7 +14,7 @@ class VideoPlayerScreen extends StatefulWidget {
     super.key,
     required this.title,
     required this.videoPath,
-    required this.imagePath,
+    required this.imagePaths, // Awak hantar macam biasa dari menu utama
     required this.description,
     this.isVideo = false,
   });
@@ -25,6 +26,10 @@ class VideoPlayerScreen extends StatefulWidget {
 class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   VideoPlayerController? _controller;
   bool _isVideoReady = false;
+
+  // ✅ UNTUK PAGE VIEW
+  final PageController _pageController = PageController();
+  int _currentPage = 0;
 
   @override
   void initState() {
@@ -42,15 +47,28 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   @override
   void dispose() {
     _controller?.dispose();
+    _pageController.dispose();
     super.dispose();
+  }
+
+  // ✅ FUNGSI BANTU: KIRA JUMLAH GAMBAR YANG DIHANTAR
+  int _getImageCount() {
+    if (widget.imagePaths is String) return 1; // Kalau biasa (1 je)
+    if (widget.imagePaths is List)
+      return widget.imagePaths.length; // Kalau senarai
+    return 0;
+  }
+
+  // ✅ FUNGSI BANTU: AMBIL NAMA GAMBAR MENGIKUT NOMBOR
+  String _getImageAt(int index) {
+    if (widget.imagePaths is String) return widget.imagePaths;
+    return widget.imagePaths[index];
   }
 
   @override
   Widget build(BuildContext context) {
-    // ✅ KITA GUNA BACKGROUNDSCREEN SEBAGAI "RUMAH" PALING LUAR
     return BackgroundWrapper(
       child: Scaffold(
-        // Kita buat Scaffold ni lutsinar supaya bunga kat BackgroundScreen nampak
         backgroundColor: Colors.transparent,
         appBar: AppBar(
           title: Text(
@@ -68,7 +86,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // 🎥 VIDEO AREA
+              // 🎥 VIDEO AREA (SAMA MACAM BIASA)
               if (widget.isVideo && _controller != null)
                 Container(
                   margin: const EdgeInsets.all(15),
@@ -83,7 +101,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                               aspectRatio: _controller!.value.aspectRatio,
                               child: VideoPlayer(_controller!),
                             ),
-                            // ... (Button Play/Pause & Progress Bar kekal sama)
                             Row(
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
@@ -129,32 +146,62 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                           ),
                         ),
                 )
-              // 🖼️ INFOGRAPHIC AREA
+              // 🖼️ INFOGRAPHIC AREA - SEKARANG DIA PANDAI KIRA SENDIRI
               else
-                Container(
-                  margin: const EdgeInsets.symmetric(
-                    horizontal: 20,
-                    vertical: 10,
-                  ),
-                  height: 380,
-                  decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(0.8),
-                    borderRadius: BorderRadius.circular(20),
-                    boxShadow: const [
-                      BoxShadow(color: Colors.black12, blurRadius: 6),
-                    ],
-                  ),
-                  child: ClipRRect(
-                    borderRadius: BorderRadius.circular(15),
-                    child: InteractiveViewer(
-                      child: Center(
-                        child: Image.asset(
-                          widget.imagePath,
-                          fit: BoxFit.contain,
-                        ),
+                Column(
+                  children: [
+                    Container(
+                      margin: const EdgeInsets.symmetric(
+                        horizontal: 20,
+                        vertical: 10,
+                      ),
+                      height: 380,
+                      decoration: BoxDecoration(
+                        color: Colors.white.withOpacity(0.85),
+                        borderRadius: BorderRadius.circular(20),
+                        boxShadow: const [
+                          BoxShadow(color: Colors.black12, blurRadius: 6),
+                        ],
+                      ),
+                      child: ClipRRect(
+                        borderRadius: BorderRadius.circular(15),
+                        // ✅ JIKA GAMBAR LEBIH 1, Guna PageView. KALAU 1 JE, Guna biasa.
+                        child: _getImageCount() > 1
+                            ? PageView(
+                                controller: _pageController,
+                                onPageChanged: (index) {
+                                  setState(() => _currentPage = index);
+                                },
+                                children: List.generate(_getImageCount(), (
+                                  index,
+                                ) {
+                                  return _buildImageWidget(_getImageAt(index));
+                                }),
+                              )
+                            : _buildImageWidget(_getImageAt(0)), // <-- BIASA JE
                       ),
                     ),
-                  ),
+
+                    // ✅ TANDA TITIK: MUNCUL JIKA ADA LEBIH 1 GAMBAR JE
+                    if (_getImageCount() > 1)
+                      Row(
+                        mainAxisAlignment: MainAxisAlignment.center,
+                        children: List.generate(_getImageCount(), (index) {
+                          return Container(
+                            margin: const EdgeInsets.symmetric(horizontal: 4),
+                            width: _currentPage == index ? 12 : 8,
+                            height: 8,
+                            decoration: BoxDecoration(
+                              color: _currentPage == index
+                                  ? Colors.pink
+                                  : Colors.grey.shade300,
+                              borderRadius: BorderRadius.circular(4),
+                            ),
+                          );
+                        }),
+                      ),
+                    const SizedBox(height: 10),
+                  ],
                 ),
 
               // 📖 DESCRIPTION TEXT
@@ -166,9 +213,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                 child: Container(
                   padding: const EdgeInsets.all(15),
                   decoration: BoxDecoration(
-                    color: Colors.white.withOpacity(
-                      0.6,
-                    ), // Teks nampak atas bunga
+                    color: Colors.white.withOpacity(0.6),
                     borderRadius: BorderRadius.circular(15),
                   ),
                   child: Text(
@@ -182,8 +227,39 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                   ),
                 ),
               ),
-              const SizedBox(height: 50), // Jarak bawah supaya tak rapat sangat
+              const SizedBox(height: 50),
             ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  // ✅ FUNGSI BINA GAMBAR (SAMA MACAM AWAK DAH ADA)
+  Widget _buildImageWidget(String imagePath) {
+    return InteractiveViewer(
+      panEnabled: true,
+      minScale: 1.0,
+      maxScale: 4.0,
+      child: Center(
+        child: Padding(
+          padding: const EdgeInsets.all(12.0),
+          child: Image.asset(
+            imagePath,
+            fit: BoxFit.contain,
+            errorBuilder: (context, error, stackTrace) {
+              return const Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Icon(Icons.broken_image, size: 50, color: Colors.grey),
+                  SizedBox(height: 10),
+                  Text(
+                    "Gambar tidak dijumpai",
+                    style: TextStyle(color: Colors.grey),
+                  ),
+                ],
+              );
+            },
           ),
         ),
       ),
