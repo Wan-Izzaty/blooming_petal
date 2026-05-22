@@ -245,7 +245,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                   children: [
                     // 1. Gambar Ustazah
                     Image.asset(
-                      'assets/images/ustazah.png', // ✅ Pastikan nama fail sama persis!
+                      'assets/images/ustazah1.png', // ✅ Pastikan nama fail sama persis!
                       width: 90, // Saiz gambar, boleh ubah
                       height: 90,
                     ),
