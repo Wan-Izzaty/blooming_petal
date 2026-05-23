@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "483053949396",
+    "project_id": "blooming-petal-1",
+    "storage_bucket": "blooming-petal-1.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:483053949396:android:c49e1409f3bf8b9f334641",
+        "android_client_info": {
+          "package_name": "com.example.blooming_petal_application"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAIutGSsHgPbIzCTYRf8lF1ImpJpV_1FDA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
