@@ -1,7 +1,8 @@
 import 'package:flutter/material.dart';
-import 'navigation_screen.dart';
-import 'package:firebase_core/firebase_core.dart'; // tambah ni
+import 'package:firebase_core/firebase_core.dart';
 import 'firebase_options.dart';
+import 'login_screen.dart';
+import 'navigation_screen.dart';
 
 void main() async {
   WidgetsFlutterBinding.ensureInitialized();
@@ -17,13 +18,12 @@ class BloomingPetalsApp extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
-
       title: 'Blooming Petals',
-
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.pink),
       ),
 
+      // ✅ UBAH SINI: DARI NavigationScreen -> LoginScreen
       home: const NavigationScreen(),
     );
   }
