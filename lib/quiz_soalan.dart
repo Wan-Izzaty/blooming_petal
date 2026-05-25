@@ -363,9 +363,20 @@ class _QuizSoalanState extends State<QuizSoalan> {
                           : Colors.grey.shade300,
                     ),
                   ),
-                  child: Row(
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
                     children: [
-                      Text(senaraiSoalan[nomborSoalan]['pilihan'][index]),
+                      Text(
+                        senaraiSoalan[nomborSoalan]['pilihan'][index],
+                        style: const TextStyle(
+                          fontSize: 14,
+                          height: 1.4, // Jarak antara baris teks
+                        ),
+                        textAlign: TextAlign.left, // Tulis dari kiri
+                        softWrap:
+                            true, // ✅ WAJIB ADA: Bagi teks patah ke baris baru
+                        overflow: TextOverflow.visible, //
+                      ),
                     ],
                   ),
                 ),
