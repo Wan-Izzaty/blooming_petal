@@ -89,8 +89,8 @@ class KenaliScreen extends StatelessWidget {
                       context,
                       "Makanan semasa haid",
                       [
-                        "assets/infographics/makanan1_haid.jpg",
-                        "assets/infographics/makanan2_haid.jpg",
+                        "assets/infographics/period_food1.png",
+                        "assets/infographics/period_food2.png",
                       ],
                       "Penerangan tentang makanan yang patut dielakkan dan patut dimakan..",
                       false,
