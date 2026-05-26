@@ -53,11 +53,13 @@ class KenaliScreen extends StatelessWidget {
                       context,
                       "Emosi ketika haid",
                       [
-                        "assets/infographics/emosi1_haid.jpg",
-                        "assets/infographics/emosi2_haid.jpg",
+                        "assets/infographics/emosi1_haid.png",
+                        "assets/infographics/emosi2_haid.png",
                       ],
                       "Penerangan emosi ketika haid...",
                       false,
+                      pesanUstazah:
+                          "Jangan risau kalau hati rasa tak sedap atau cepat merajuk waktu haid ya. Itu kesan hormon, bukan salah adik. Bertenang, rehat secukupnya dan buat benda yang menggembirakan hati 💕",
                     ),
 
                     // ✅ KHAS UNTUK MANDI WAJIB (Ada Video)
@@ -68,15 +70,21 @@ class KenaliScreen extends StatelessWidget {
                       "Kitaran haid ialah...",
                       true, // TRUE sebab ada video
                       videoPath: "assets/videos/kitaran_haid.mp4",
+                      pesanUstazah:
+                          "Faham pasal kitaran ni sangat penting ya. Bila adik tahu kira tarikh, adik boleh bersedia awal dan faham keadaan badan sendiri dengan lebih baik 📅✨",
                     ),
 
                     _buildMenuCard(
                       context,
                       "Jenis produk haid",
-                      "assets/infographics/period_products.jpg",
+                      "assets/infographics/period_products.png",
                       "Berikut adalah jenis-jenis produk...",
-                      false,
+                      true, // TRUE sebab ada video
+                      videoPath: "assets/videos/Period_products.mp4",
+                      pesanUstazah:
+                          "Banyak pilihan produk di pasaran, tapi adik-adik kena pandai pilih yang sesuai dengan diri dan selesa. Yang paling penting, pastikan ia bersih dan selamat digunakan ya 🩸",
                     ),
+
                     _buildMenuCard(
                       context,
                       "kebersihan ketika haid",
@@ -84,6 +92,8 @@ class KenaliScreen extends StatelessWidget {
                       "Penerangan tentang penjagaan...",
                       true, // TRUE sebab ada video
                       videoPath: "assets/videos/penjagaan_kebersihan.mp4",
+                      pesanUstazah:
+                          "Kebersihan adalah sebahagian daripada iman tau. Badan bersih, kita rasa selesa, elak kuman datang, dan ibadah kita jadi lebih sempurna. Jaga diri elok-elok ya 🧼🌸",
                     ),
                     _buildMenuCard(
                       context,
@@ -94,13 +104,28 @@ class KenaliScreen extends StatelessWidget {
                       ],
                       "Penerangan tentang makanan yang patut dielakkan dan patut dimakan..",
                       false,
+                      pesanUstazah:
+                          "Jaga pemakanan masa haid ni sangat bagus untuk kurangkan rasa lenguh atau sakit. Banyakkan minum air kosong dan makan benda sihat ya, supaya badan kekal bertenaga 💪🍎",
                     ),
                     _buildMenuCard(
                       context,
                       "Perubahan badan setelah haid",
-                      "assets/images/berubah.png",
+                      [
+                        "assets/infographics/body_change_1.png",
+                        "assets/infographics/body_change_2.png",
+                        "assets/infographics/body_change_3.png",
+                        "assets/infographics/body_change_4.png",
+                        "assets/infographics/body_change_5.png",
+                        "assets/infographics/body_change_5.png",
+                        "assets/infographics/body_change_6.png",
+                        "assets/infographics/body_change_7.png",
+                        "assets/infographics/body_change_8.png",
+                        "assets/infographics/body_change_9.png",
+                      ],
                       "Kenapa badan kita berubah...",
                       false,
+                      pesanUstazah:
+                          "Semua perubahan pada badan ni tanda adik-adik sedang membesar dan matang. Jangan malu atau risau, itu cara Allah jadikan wanita makin cantik dan sempurna ciptaan-Nya 🌷",
                     ),
                   ],
                 ),
@@ -120,6 +145,7 @@ class KenaliScreen extends StatelessWidget {
     String desc,
     bool isVideo, {
     String videoPath = "",
+    String pesanUstazah = "",
   }) {
     return GestureDetector(
       onTap: () {
@@ -131,6 +157,7 @@ class KenaliScreen extends StatelessWidget {
               description: desc,
               videoPath: videoPath,
               imagePaths: imagePaths,
+              ustazahMessage: pesanUstazah,
               isVideo: isVideo,
             ),
           ),

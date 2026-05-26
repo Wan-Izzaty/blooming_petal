@@ -65,7 +65,7 @@ class IslamScreen extends StatelessWidget {
                       "assets/images/mandi.png",
                       "Berikut adalah cara mandi wajib yang betul mengikut syarak...",
                       true,
-                      videoPath: "assets/videos/mandi_wajib.mp4",
+                      videoPath: "assets/videos/panduan_mandi_wajib.mp4",
                     ),
 
                     _buildMenuCard(
@@ -85,14 +85,30 @@ class IslamScreen extends StatelessWidget {
                     _buildMenuCard(
                       context,
                       "Kenali jenis darah",
-                      "assets/images/darah.png",
+                      [
+                        "assets/infographics/jenis_darah_1.png",
+                        "assets/infographics/jenis_darah_2.png",
+                        "assets/infographics/jenis_darah_3.png",
+                        "assets/infographics/jenis_darah_4.png",
+                        "assets/infographics/jenis_darah_5.png",
+                        "assets/infographics/jenis_darah_6.png",
+                      ],
+
                       "Penerangan jenis darah...",
                       false,
                     ),
                     _buildMenuCard(
                       context,
-                      "Bersih dari haid",
-                      "assets/images/bersih.png",
+                      "Tanda suci dari haid",
+                      [
+                        "assets/infographics/tanda_suci_1.png",
+                        "assets/infographics/tanda_suci_2.png",
+                        "assets/infographics/tanda_suci_3.png",
+                        "assets/infographics/tanda_suci_4.png",
+                        "assets/infographics/tanda_suci_5.png",
+                        "assets/infographics/tanda_suci_6.png",
+                      ],
+
                       "Penerangan cara bersuci...",
                       false,
                     ),

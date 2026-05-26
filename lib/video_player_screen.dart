@@ -19,8 +19,7 @@ class VideoPlayerScreen extends StatefulWidget {
     required this.imagePaths, // Awak hantar macam biasa dari menu utama
     required this.description,
     this.isVideo = false,
-    this.ustazahMessage =
-        "Semoga ilmu ini bermanfaat untukmu kawan-kawan! ❤️", // Mesej asal
+    this.ustazahMessage = "", // Mesej asal
   });
 
   @override
@@ -72,7 +71,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   @override
   Widget build(BuildContext context) {
     return BackgroundWrapper(
-      // ✅ DAH BETULKAN NAMA DARI BackgroundWrapper -> BackgroundScreen
       child: Scaffold(
         backgroundColor: Colors.transparent,
         appBar: AppBar(
@@ -308,19 +306,19 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     );
   }
 
-  // ✅ FUNGSI BINA GAMBAR (DAH DIUBAH SUPAYA PENUH KOTAK)
+  // ✅ FUNGSI BINA GAMBAR (DIBETULKAN: MUAT SEMPURNA TANPA TERPOTONG)
   Widget _buildImageWidget(String imagePath) {
     return InteractiveViewer(
       panEnabled: true,
       minScale: 1.0,
-      maxScale: 4.0,
+      maxScale: 4.0, // Masih boleh zum kalau nak tengok detail
       child: Center(
-        // ✅ SAYA BUANG PADDING SEKELILING SUPAYA GAMBAR PENUH KOTAK PUTIH
         child: Image.asset(
           imagePath,
-          fit: BoxFit.cover, // ✅ Dah tukar ke cover supaya penuh P
-          height: double.infinity, // Penuh tinggi
-
+          fit: BoxFit
+              .contain, // ✅ YANG PENTING: GUNA INI! Gambar nampak penuh semua, tak potong
+          width: double.infinity, // ✅ Penuh lebar kotak
+          // height: double.infinity, -> Tak perlu dah bila guna contain
           errorBuilder: (context, error, stackTrace) {
             return const Column(
               mainAxisAlignment: MainAxisAlignment.center,
