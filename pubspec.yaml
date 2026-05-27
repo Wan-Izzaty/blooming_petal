@@ -36,6 +36,7 @@ dependencies:
   
   cupertino_icons: ^1.0.8
   video_player: ^2.8.1 
+  audioplayers: ^5.2.1
   animated_text_kit: ^4.3.0
   firebase_core: ^4.9.0
   firebase_auth: ^6.5.1
@@ -54,7 +55,7 @@ dev_dependencies:
 
 # For information on the generic Dart part of this file, see the
 # following page: https://dart.dev/tools/pub/pubspec
-
+  
 # The following section is specific to Flutter packages.
 flutter:
 
@@ -68,6 +69,9 @@ flutter:
     - assets/images/
     - assets/infographics/
     - assets/videos/
+    - assets/audio/
+
+
   # To add assets to your application, add an assets section, like this:
   # assets:
   #   - images/a_dot_burr.jpeg

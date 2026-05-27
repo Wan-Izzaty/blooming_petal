@@ -1,25 +1,29 @@
 import 'package:flutter/material.dart';
 import 'package:video_player/video_player.dart';
 import 'background_screen.dart';
-import 'package:animated_text_kit/animated_text_kit.dart'; // ✅ IMPORT ANIMASI
+import 'package:animated_text_kit/animated_text_kit.dart';
+import 'package:audioplayers/audioplayers.dart';
 
 class VideoPlayerScreen extends StatefulWidget {
-  // ✅ UBAH SIKIT: Sekarang imagePaths boleh terima String ATAU List<String>
   final dynamic imagePaths;
   final String title;
   final String videoPath;
   final String description;
   final bool isVideo;
-  final String ustazahMessage; // ✅ TAMBAH: Mesej ikut topik
+  final bool isAudio;
+  final List<dynamic>? senaraiDoa;
+  final String ustazahMessage;
 
   const VideoPlayerScreen({
     super.key,
     required this.title,
     required this.videoPath,
-    required this.imagePaths, // Awak hantar macam biasa dari menu utama
+    required this.imagePaths,
     required this.description,
     this.isVideo = false,
-    this.ustazahMessage = "", // Mesej asal
+    this.isAudio = false,
+    this.senaraiDoa,
+    this.ustazahMessage = "",
   });
 
   @override
@@ -30,7 +34,9 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
   VideoPlayerController? _controller;
   bool _isVideoReady = false;
 
-  // ✅ UNTUK PAGE VIEW
+  final AudioPlayer _audioPlayer = AudioPlayer();
+  String? _sedangMainAudio;
+
   final PageController _pageController = PageController();
   int _currentPage = 0;
 
@@ -49,28 +55,40 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
 
   void _skip(int seconds) {
     if (_controller != null && _isVideoReady) {
-      final currentPosition = _controller!.value.position;
-      final targetPosition = currentPosition + Duration(seconds: seconds);
-      _controller!.seekTo(targetPosition);
+      final kedudukan = _controller!.value.position;
+      _controller!.seekTo(kedudukan + Duration(seconds: seconds));
+    }
+  }
+
+  Future<void> _mainHentiAudio(String failAudio) async {
+    if (_sedangMainAudio == failAudio) {
+      await _audioPlayer.stop();
+      setState(() => _sedangMainAudio = null);
+    } else {
+      await _audioPlayer.stop();
+      await _audioPlayer.play(AssetSource(failAudio));
+      setState(() => _sedangMainAudio = failAudio);
+
+      _audioPlayer.onPlayerComplete.listen((event) {
+        setState(() => _sedangMainAudio = null);
+      });
     }
   }
 
   @override
   void dispose() {
     _controller?.dispose();
+    _audioPlayer.dispose();
     _pageController.dispose();
     super.dispose();
   }
 
-  // ✅ FUNGSI BANTU: KIRA JUMLAH GAMBAR YANG DIHANTAR
   int _getImageCount() {
-    if (widget.imagePaths is String) return 1; // Kalau biasa (1 je)
-    if (widget.imagePaths is List)
-      return widget.imagePaths.length; // Kalau senarai
+    if (widget.imagePaths is String) return 1;
+    if (widget.imagePaths is List) return widget.imagePaths.length;
     return 0;
   }
 
-  // ✅ FUNGSI BANTU: AMBIL NAMA GAMBAR MENGIKUT NOMBOR
   String _getImageAt(int index) {
     if (widget.imagePaths is String) return widget.imagePaths;
     return widget.imagePaths[index];
@@ -97,7 +115,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // 🎥 VIDEO AREA (SAMA MACAM BIASA)
+              // 🎥 VIDEO AREA
               if (widget.isVideo && _controller != null)
                 Container(
                   margin: const EdgeInsets.all(15),
@@ -116,12 +134,20 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                               mainAxisAlignment: MainAxisAlignment.center,
                               children: [
                                 IconButton(
+                                  icon: const Icon(
+                                    Icons.replay_10,
+                                    color: Colors.white,
+                                    size: 30,
+                                  ),
+                                  onPressed: () => _skip(-10),
+                                ),
+                                IconButton(
                                   icon: Icon(
                                     _controller!.value.isPlaying
                                         ? Icons.pause
                                         : Icons.play_arrow,
                                     color: Colors.white,
-                                    size: 30,
+                                    size: 40,
                                   ),
                                   onPressed: () {
                                     setState(() {
@@ -133,34 +159,24 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                                 ),
                                 IconButton(
                                   icon: const Icon(
-                                    Icons.replay_10,
-                                    color: Colors.white,
-                                    size: 30,
-                                  ),
-                                  onPressed: () => _skip(-10), // Tolak 10 saa
-                                ),
-                                IconButton(
-                                  icon: const Icon(
                                     Icons.forward_10,
                                     color: Colors.white,
                                     size: 30,
                                   ),
-                                  onPressed: () => _skip(10), // Tambah 10 saat
-                                ),
-                                Expanded(
-                                  child: Padding(
-                                    padding: const EdgeInsets.all(15.0),
-                                    child: VideoProgressIndicator(
-                                      _controller!,
-                                      allowScrubbing: true,
-                                      colors: const VideoProgressColors(
-                                        playedColor: Colors.pink,
-                                        backgroundColor: Colors.grey,
-                                      ),
-                                    ),
-                                  ),
+                                  onPressed: () => _skip(10),
                                 ),
                               ],
+                            ),
+                            Padding(
+                              padding: const EdgeInsets.all(15.0),
+                              child: VideoProgressIndicator(
+                                _controller!,
+                                allowScrubbing: true,
+                                colors: const VideoProgressColors(
+                                  playedColor: Colors.pink,
+                                  backgroundColor: Colors.grey,
+                                ),
+                              ),
                             ),
                           ],
                         )
@@ -173,8 +189,9 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                           ),
                         ),
                 )
-              // 🖼️ INFOGRAPHIC AREA - SEKARANG DIA PANDAI KIRA SENDIRI
-              else
+              // 🖼️ GAMBAR / INFOGRAFIK
+              else if (!widget.isVideo &&
+                  !widget.isAudio) // ✅ Tambah !widget.isAudio kat sini
                 Column(
                   children: [
                     Container(
@@ -192,46 +209,146 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                       ),
                       child: ClipRRect(
                         borderRadius: BorderRadius.circular(15),
-                        // ✅ JIKA GAMBAR LEBIH 1, Guna PageView. KALAU 1 JE, Guna biasa.
                         child: _getImageCount() > 1
                             ? PageView(
                                 controller: _pageController,
-                                onPageChanged: (index) {
-                                  setState(() => _currentPage = index);
-                                },
-                                children: List.generate(_getImageCount(), (
-                                  index,
-                                ) {
-                                  return _buildImageWidget(_getImageAt(index));
-                                }),
+                                onPageChanged: (i) =>
+                                    setState(() => _currentPage = i),
+                                children: List.generate(
+                                  _getImageCount(),
+                                  (i) => _buildImageWidget(_getImageAt(i)),
+                                ),
                               )
-                            : _buildImageWidget(_getImageAt(0)), // <-- BIASA JE
+                            : _buildImageWidget(_getImageAt(0)),
                       ),
                     ),
-
-                    // ✅ TANDA TITIK: MUNCUL JIKA ADA LEBIH 1 GAMBAR JE
                     if (_getImageCount() > 1)
                       Row(
                         mainAxisAlignment: MainAxisAlignment.center,
-                        children: List.generate(_getImageCount(), (index) {
-                          return Container(
+                        children: List.generate(
+                          _getImageCount(),
+                          (i) => Container(
                             margin: const EdgeInsets.symmetric(horizontal: 4),
-                            width: _currentPage == index ? 12 : 8,
+                            width: _currentPage == i ? 12 : 8,
                             height: 8,
                             decoration: BoxDecoration(
-                              color: _currentPage == index
+                              color: _currentPage == i
                                   ? Colors.pink
                                   : Colors.grey.shade300,
                               borderRadius: BorderRadius.circular(4),
                             ),
-                          );
-                        }),
+                          ),
+                        ),
                       ),
                     const SizedBox(height: 10),
                   ],
                 ),
 
-              // 📖 DESCRIPTION TEXT
+              // DOA & ZIKIR
+              if (widget.isAudio && widget.senaraiDoa != null)
+                Padding(
+                  padding: const EdgeInsets.symmetric(
+                    horizontal: 20,
+                    vertical: 10,
+                  ),
+                  child: Column(
+                    children: widget.senaraiDoa!.map((doa) {
+                      final sedangMain = (_sedangMainAudio == doa['audio']);
+                      return Container(
+                        margin: const EdgeInsets.only(bottom: 15),
+                        padding: const EdgeInsets.all(15),
+                        decoration: BoxDecoration(
+                          color: Colors.white.withOpacity(0.9),
+                          borderRadius: BorderRadius.circular(18),
+                          border: Border.all(color: Colors.pink.shade100),
+                          boxShadow: [
+                            BoxShadow(
+                              color: Colors.black.withOpacity(0.05),
+                              blurRadius: 5,
+                            ),
+                          ],
+                        ),
+                        child: Column(
+                          children: [
+                            Row(
+                              mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                              children: [
+                                Expanded(
+                                  child: Text(
+                                    doa['nama'],
+                                    style: const TextStyle(
+                                      fontWeight: FontWeight.bold,
+                                      fontSize: 15,
+                                      color: Colors.pink,
+                                    ),
+                                  ),
+                                ),
+                                IconButton(
+                                  onPressed: () =>
+                                      _mainHentiAudio(doa['audio']),
+                                  icon: Icon(
+                                    sedangMain
+                                        ? Icons.volume_off
+                                        : Icons.volume_up,
+                                    color: sedangMain
+                                        ? Colors.red
+                                        : Colors.pink,
+                                    size: 28,
+                                  ),
+                                ),
+                              ],
+                            ),
+                            const Divider(height: 5),
+
+                            // ✅ TULISAN ARAB
+                            Text(
+                              doa['arab'],
+                              textAlign: TextAlign.right,
+                              style: const TextStyle(
+                                fontSize: 22,
+                                height: 1.6,
+                                fontWeight: FontWeight.w600,
+                              ),
+                            ),
+                            const SizedBox(height: 8),
+
+                            // ✅ TULISAN RUMI
+                            Text(
+                              doa['rumi'],
+                              textAlign: TextAlign.center,
+                              style: TextStyle(
+                                fontSize: 14,
+                                fontStyle: FontStyle.italic,
+                                color: Colors.grey.shade700,
+                              ),
+                            ),
+                            const SizedBox(height: 10),
+
+                            // ✅ TERJEMAHAN
+                            Container(
+                              width: double.infinity,
+                              padding: const EdgeInsets.all(10),
+                              decoration: BoxDecoration(
+                                color: Colors.pink.shade50,
+                                borderRadius: BorderRadius.circular(10),
+                              ),
+                              child: Text(
+                                doa['maksud'],
+                                textAlign: TextAlign.center,
+                                style: const TextStyle(
+                                  fontSize: 13,
+                                  height: 1.4,
+                                ),
+                              ),
+                            ),
+                          ],
+                        ),
+                      );
+                    }).toList(),
+                  ),
+                ),
+
+              // 📖 PENERANGAN BIASA
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 20,
@@ -255,25 +372,21 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                 ),
               ),
 
-              // 👩🏫 ✅ BAHAGIAN BARU: WATAK USTAZAH + ANIMASI TULIS
+              // USTAZAH ANIMASI
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 20,
                   vertical: 10,
                 ),
                 child: Row(
-                  crossAxisAlignment: CrossAxisAlignment
-                      .end, // Supaya belon kata ikut bawah gambar
+                  crossAxisAlignment: CrossAxisAlignment.end,
                   children: [
-                    // 1. Gambar Ustazah
                     Image.asset(
-                      'assets/images/ustazah1.png', // ✅ Pastikan nama fail sama persis!
-                      width: 90, // Saiz gambar, boleh ubah
+                      'assets/images/ustazah1.png',
+                      width: 90,
                       height: 90,
                     ),
                     const SizedBox(width: 8),
-
-                    // 2. Belon Kata + Animasi
                     Expanded(
                       child: Container(
                         padding: const EdgeInsets.symmetric(
@@ -301,17 +414,13 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                           child: AnimatedTextKit(
                             animatedTexts: [
                               TypewriterAnimatedText(
-                                widget
-                                    .ustazahMessage, // ✅ Ambil mesej ikut topik
-                                speed: const Duration(
-                                  milliseconds: 80,
-                                ), // Kelajuan taip
-                                cursor: '|', // Tanda kursor menaip
+                                widget.ustazahMessage,
+                                speed: const Duration(milliseconds: 80),
+                                cursor: '|',
                               ),
                             ],
-                            totalRepeatCount: 1, // Taip sekali je
-                            displayFullTextOnTap:
-                                true, // Tekan skrin terus habis tulis
+                            totalRepeatCount: 1,
+                            displayFullTextOnTap: true,
                             isRepeatingAnimation: false,
                           ),
                         ),
@@ -321,8 +430,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                 ),
               ),
 
-              // ✅ TAMAT BAHAGIAN USTAZAH
-              const SizedBox(height: 50), // Jarak bawah skrin
+              const SizedBox(height: 50),
             ],
           ),
         ),
@@ -330,32 +438,23 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     );
   }
 
-  // ✅ FUNGSI BINA GAMBAR (DIBETULKAN: MUAT SEMPURNA TANPA TERPOTONG)
   Widget _buildImageWidget(String imagePath) {
     return InteractiveViewer(
       panEnabled: true,
       minScale: 1.0,
-      maxScale: 4.0, // Masih boleh zum kalau nak tengok detail
+      maxScale: 4.0,
       child: Center(
         child: Image.asset(
           imagePath,
-          fit: BoxFit
-              .contain, // ✅ YANG PENTING: GUNA INI! Gambar nampak penuh semua, tak potong
-          width: double.infinity, // ✅ Penuh lebar kotak
-          // height: double.infinity, -> Tak perlu dah bila guna contain
-          errorBuilder: (context, error, stackTrace) {
-            return const Column(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Icon(Icons.broken_image, size: 50, color: Colors.grey),
-                SizedBox(height: 10),
-                Text(
-                  "Gambar tidak dijumpai",
-                  style: TextStyle(color: Colors.grey),
-                ),
-              ],
-            );
-          },
+          fit: BoxFit.contain,
+          width: double.infinity,
+          errorBuilder: (_, __, ___) => const Column(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Icon(Icons.broken_image, size: 50, color: Colors.grey),
+              Text("Gambar tiada", style: TextStyle(color: Colors.grey)),
+            ],
+          ),
         ),
       ),
     );

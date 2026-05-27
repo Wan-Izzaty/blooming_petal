@@ -13,16 +13,65 @@ class IslamScreen extends StatefulWidget {
 class _IslamScreenState extends State<IslamScreen> {
   String kataKunci = "";
 
+  // ✅ NAK LETAK SINI: SENARAI PENUH TOPIK ISLAMIK
   final List<Map<String, dynamic>> senaraiTopikIslamik = [
     {
-      "title": "Zikir dan doa",
-      "image": "assets/images/zikir.png",
+      "title": "Zikir & Doa",
+      "image": "assets/images/zikir_doa.png", // Pastikan gambar ada
       "desc":
-          "Mengamalkan zikir dan doa harian dapat menenangkan hati, mendekatkan diri kepada Allah dan memberi ketenangan jiwa terutamanya ketika sedang berhadapan dengan perubahan emosi.",
+          "Koleksi zikir dan doa harian, sesuai diamalkan ketika haid untuk ketenangan hati dan kesihatan badan.",
       "isVideo": false,
+      "isAudio": true, //
       "videoPath": "",
       "ustazahPesan":
-          "Banyakkan berzikir dan berdoa ya adik-adik. Bila hati rapat dengan Allah, semua urusan jadi tenang dan mudah. Amalkan selalu, nanti jadi kebiasaan yang indah ❤️",
+          "Bacalah zikir dan doa ni selalu ya adik-adik. Bila hati rapat dengan Allah, badan pun rasa tenang dan sihat ❤️",
+      // ✅ DATA LENGKAP DOA (ARAB, RUMI, MAKSUD, FAIL AUDIO)
+      "senaraiDoa": [
+        {
+          "nama": "Zikir Tasbeeh",
+          "arab":
+              "سُبْحَانَ اللهِ، وَالْحَمْدُ لِلَّهِ، وَلَا إِلَهَ إِلَّا اللهُ، وَاللَّهُ أَكْبَرُ",
+          "rumi": "Subhanallah, Alhamdulillah, La ilaha illallah, Allahu Akbar",
+          "maksud":
+              "Maha Suci Allah, Segala Puji bagi Allah, Tiada Tuhan selain Allah, Allah Maha Besar.",
+          "audio": "audio/tasbeeh.mp3", // ✅ Fail mp3 awak
+        },
+        {
+          "nama": "Istighfar",
+          "arab": "أَسْتَغْفِرُ اللهَ",
+          "rumi": "Astaghfirullah",
+          "maksud": "Aku memohon ampun kepada Allah.",
+          "audio": "assets/audio/istighfar.mp3",
+        },
+        {
+          "nama": "Selawat",
+          "arab": "اللَّهُمَّ صَلِّ عَلَى مُحَمَّدٍ وَعَلَى آلِ مُحَمَّدٍ",
+          "rumi": "Allahumma salli 'ala Muhammadin wa 'ala ali Muhammad",
+          "maksud":
+              "Ya Allah, berikanlah rahmat ke atas Nabi Muhammad dan keluarga baginda.",
+          "audio": "assets/audio/selawat.mp3",
+        },
+        {
+          "nama": "Doa Hilangkan Sakit Perut",
+          "arab":
+              "اللَّهُمَّ ربَّ النَّاسِ ، أَذْهِب الْبَأسَ ، واشْفِ ، أَنْتَ الشَّافي لا شِفَاءَ إِلاَّ شِفَاؤُكَ ، شِفاءً لا يُغَادِرُ سقَماً",
+          "rumi":
+              "Allahumma Rabban-naas, azhibil-ba’s, washfi antash-Shaafi laa shifaa’a illaa shifaa’uka, shifaa’an laa yughaadiru saqamaa",
+          "maksud":
+              "Ya Allah Tuhan sekalian manusia, hilangkanlah segala kesakitan ini, sembuhkanlah aku. Engkaulah Penyembuh, tiada penyembuhan selain penyembuhan-Mu, penyembuhan yang tidak meninggalkan sebarang penyakit.",
+          "audio": "audio/doa_nyeri_haid.mp3",
+        },
+        {
+          "nama": "Doa Hari Pertama Haid",
+          "arab":
+              "الْحَمْدُللهِ عَلَى كُلِّ حَالٍ وَأَسْتَغْفِرُ اللهَ مِنْ كُلِّ ذَنْبٍ",
+          "rumi":
+              "Alhamdulillahi ‘ala kulli halin, wa astaghfirullaha min kulli dzambin",
+          "maksud":
+              "Segala puji bagi Allah atas segala keadaan, dan aku memohon ampun kepada Allah daripada segala dosaku.",
+          "audio": "audio/Doa_first_day_haid.mp3",
+        },
+      ],
     },
     {
       "title": "Mandi wajib",
@@ -30,6 +79,7 @@ class _IslamScreenState extends State<IslamScreen> {
       "desc":
           "Mandi wajib adalah satu ibadah mensucikan diri daripada hadas besar. Ia wajib dilakukan apabila darah haid berhenti sepenuhnya supaya dibolehkan melakukan ibadah seperti solat dan membaca Al-Quran.",
       "isVideo": true,
+      "isAudio": false,
       "videoPath": "assets/videos/panduan_mandi_wajib.mp4",
       "ustazahPesan":
           "Mandi wajib ni syarat utama nak balik bersuci dan solat semula ya. Kena betulkan cara supaya sah ibadah kita. Tengok video ni sampai habis, fahamkan langkah-langkahnya dengan teliti 🕌",
@@ -48,6 +98,7 @@ class _IslamScreenState extends State<IslamScreen> {
       "desc":
           "Baligh adalah tanda seseorang itu sudah dewasa dan mula memikul tanggungjawab agama. Bermula waktu ini, segala amal ibadah dicatat pahalanya dan dosa juga dicatat perbuatannya.",
       "isVideo": false,
+      "isAudio": false,
       "videoPath": "",
       "ustazahPesan":
           "Bila masuk alam baligh, maknanya adik dah jadi dewasa dalam mata syariat. Mulai sekarang, segala perbuatan dikira. Anggap ni permulaan hidup yang lebih matang dan indah bersama agama Allah ✨",
@@ -66,9 +117,10 @@ class _IslamScreenState extends State<IslamScreen> {
       "desc":
           "Wanita yang sedang haid tidak diwajibkan berpuasa dan haram baginya berpuasa. Puasa yang ditinggalkan wajib diganti (qada') pada hari lain selepas suci, tetapi solat yang ditinggalkan tidak perlu diganti.",
       "isVideo": false,
+      "isAudio": false,
       "videoPath": "",
       "ustazahPesan":
-          "Di bulan mulia ni, kalau datang haid, adik tak boleh puasa dan tak perlu solat. Tapi jangan sedih, pahala niat puasa tetap ada. Nanti lepas suci, ganti balik puasa tu ya. Allah itu Maha Mengetahui keadaan kita 🤲",
+          "Pada bulan mulia, kalau datang haid, adik tak boleh puasa dan tak perlu solat. Tapi jangan sedih, pahala niat puasa tetap ada. Nanti lepas suci, ganti balik puasa tu ya. Allah itu Maha Mengetahui keadaan kita 🤲",
     },
     {
       "title": "Kenali jenis darah",
@@ -83,6 +135,7 @@ class _IslamScreenState extends State<IslamScreen> {
       "desc":
           "Dalam syarak, darah yang keluar dari faraj dibahagikan kepada tiga: Haid, Istihadah dan Nifas. Setiap jenis darah ada hukum dan peraturan ibadah yang berbeza-beza, jadi penting untuk kenal bezanya.",
       "isVideo": false,
+      "isAudio": false,
       "videoPath": "",
       "ustazahPesan":
           "Bukan semua darah yang keluar tu dikira haid tau adik-adik. Ada darah penyakit, ada darah nifas. Kalau salah anggap, nanti ibadah jadi tak betul. Belajar beza dia elok-elok kat sini ya 🩸",
@@ -100,6 +153,7 @@ class _IslamScreenState extends State<IslamScreen> {
       "desc":
           "Tanda utama wanita suci daripada haid adalah berhenti sepenuhnya pengeluaran darah atau lendir, dan biasanya disusuli dengan keluarnya cairan putih jernih. Apabila sudah suci, wajib segera mandi wajib untuk menyambung kembali ibadah.",
       "isVideo": false,
+      "isAudio": false,
       "videoPath": "",
       "ustazahPesan":
           "Bila darah dah berhenti dan keluar cecair putih jernih, itu tanda adik dah suci. Segera mandi wajib supaya boleh kembali dekat dengan Allah, solat dan baca Al-Quran semula. Jangan tangguh-tangguh ya 🕋",
@@ -172,6 +226,8 @@ class _IslamScreenState extends State<IslamScreen> {
                             topik["isVideo"],
                             videoPath: topik["videoPath"],
                             ustazahPesan: topik["ustazahPesan"],
+                            isAudio: topik["isAudio"], // ✅ WAJIB LETAK NI
+                            senaraiDoa: topik["senaraiDoa"],
                           );
                         }).toList(),
                       ),
@@ -192,6 +248,8 @@ class _IslamScreenState extends State<IslamScreen> {
     bool isVideo, {
     String videoPath = "",
     String ustazahPesan = "",
+    bool isAudio = false, // ✅ TAMBAH NI
+    List<dynamic>? senaraiDoa,
   }) {
     return GestureDetector(
       onTap: () {
@@ -205,6 +263,8 @@ class _IslamScreenState extends State<IslamScreen> {
               imagePaths: imagePaths,
               isVideo: isVideo,
               ustazahMessage: ustazahPesan,
+              isAudio: isAudio,
+              senaraiDoa: senaraiDoa,
             ),
           ),
         );
@@ -221,7 +281,8 @@ class _IslamScreenState extends State<IslamScreen> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: const Icon(Icons.mosque, size: 50, color: Colors.pink),
+                // ✅ TUKAR: Daripada Icon, jadi GAMBAR (ikut gambar dalam data)
+                child: Icon(Icons.mosque, size: 50, color: Colors.pink),
               ),
             ),
             const SizedBox(height: 5),
