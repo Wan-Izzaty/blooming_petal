@@ -28,20 +28,20 @@ class _IslamScreenState extends State<IslamScreen> {
       // ✅ DATA LENGKAP DOA (ARAB, RUMI, MAKSUD, FAIL AUDIO)
       "senaraiDoa": [
         {
-          "nama": "Zikir Tasbeeh",
+          "nama": "Zikir Tasbih",
           "arab":
               "سُبْحَانَ اللهِ، وَالْحَمْدُ لِلَّهِ، وَلَا إِلَهَ إِلَّا اللهُ، وَاللَّهُ أَكْبَرُ",
           "rumi": "Subhanallah, Alhamdulillah, La ilaha illallah, Allahu Akbar",
           "maksud":
               "Maha Suci Allah, Segala Puji bagi Allah, Tiada Tuhan selain Allah, Allah Maha Besar.",
-          "audio": "audio/tasbeeh.mp3", // ✅ Fail mp3 awak
+          "audio": "audio/zikir_tasbih.mp3", // ✅ Fail mp3 awak
         },
         {
           "nama": "Istighfar",
           "arab": "أَسْتَغْفِرُ اللهَ",
           "rumi": "Astaghfirullah",
           "maksud": "Aku memohon ampun kepada Allah.",
-          "audio": "assets/audio/istighfar.mp3",
+          "audio": "audio/astagfirullah.mp3",
         },
         {
           "nama": "Selawat",
@@ -49,7 +49,7 @@ class _IslamScreenState extends State<IslamScreen> {
           "rumi": "Allahumma salli 'ala Muhammadin wa 'ala ali Muhammad",
           "maksud":
               "Ya Allah, berikanlah rahmat ke atas Nabi Muhammad dan keluarga baginda.",
-          "audio": "assets/audio/selawat.mp3",
+          "audio": "audio/selawat.mp3",
         },
         {
           "nama": "Doa Hilangkan Sakit Perut",
