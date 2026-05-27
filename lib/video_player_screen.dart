@@ -47,6 +47,14 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
     }
   }
 
+  void _skip(int seconds) {
+    if (_controller != null && _isVideoReady) {
+      final currentPosition = _controller!.value.position;
+      final targetPosition = currentPosition + Duration(seconds: seconds);
+      _controller!.seekTo(targetPosition);
+    }
+  }
+
   @override
   void dispose() {
     _controller?.dispose();
@@ -122,6 +130,22 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                                           : _controller!.play();
                                     });
                                   },
+                                ),
+                                IconButton(
+                                  icon: const Icon(
+                                    Icons.replay_10,
+                                    color: Colors.white,
+                                    size: 30,
+                                  ),
+                                  onPressed: () => _skip(-10), // Tolak 10 saa
+                                ),
+                                IconButton(
+                                  icon: const Icon(
+                                    Icons.forward_10,
+                                    color: Colors.white,
+                                    size: 30,
+                                  ),
+                                  onPressed: () => _skip(10), // Tambah 10 saat
                                 ),
                                 Expanded(
                                   child: Padding(
