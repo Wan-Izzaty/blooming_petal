@@ -56,6 +56,8 @@ class IslamScreen extends StatelessWidget {
                       "assets/images/zikir.png",
                       "Penerangan tentang zikir...",
                       false,
+                      pesanUstazah:
+                          "Banyakkan berzikir dan berdoa ya adik-adik. Bila hati rapat dengan Allah, semua urusan jadi tenang dan mudah. Amalkan selalu, nanti jadi kebiasaan yang indah ❤️",
                     ),
 
                     // ✅ KHAS UNTUK MANDI WAJIB (Ada Video)
@@ -63,24 +65,46 @@ class IslamScreen extends StatelessWidget {
                       context,
                       "Mandi wajib",
                       "assets/images/mandi.png",
-                      "Berikut adalah cara mandi wajib yang betul mengikut syarak...",
+                      "Mandi wajib adalah satu ibadah mensucikan diri daripada hadas besar, Ianya wajib dilakukan apabila darah haid berhenti sepenuhnya supaya dibolehkan melakukan ibadah seperti solat dan membaca Al-Quran.",
                       true,
                       videoPath: "assets/videos/panduan_mandi_wajib.mp4",
+                      pesanUstazah:
+                          "Mandi wajib ni syarat utama nak balik bersuci dan solat semula ya. Kena betulkan cara supaya sah ibadah kita.Untuk kefahaman adik-adik, tengok video ini sampai habis!❤️",
                     ),
 
                     _buildMenuCard(
                       context,
                       "Peralihan alam baligh",
-                      "assets/images/baligh.png",
-                      "Penerangan alam baligh...",
+                      [
+                        "assets/infographics/akil_baligh_1.png",
+                        "assets/infographics/akil_baligh_2.png",
+                        "assets/infographics/akil_baligh_3.png",
+                        "assets/infographics/akil_baligh_4.png",
+                        "assets/infographics/akil_baligh_5.png",
+                        "assets/infographics/akil_baligh_6.png",
+                        "assets/infographics/akil_baligh_7.png",
+                      ],
+                      "Baligh adalah tanda seseorang itu sudah dewasa dan mula memikul tanggungjawab agama. Bermula waktu ini, segala amal ibadah dicatat pahalanya dan dosa juga dicatat perbuatannya.",
                       false,
+                      pesanUstazah:
+                          "Bila masuk alam baligh, maknanya adik dah jadi dewasa dalam mata syariat. Mulai sekarang, segala perbuatan dikira. Anggap ni permulaan hidup yang lebih matang dan indah bersama agama Allah ✨",
                     ),
                     _buildMenuCard(
                       context,
-                      "Panduan Ramadhan",
-                      "assets/images/ramadhan.png",
-                      "Penerangan puasa...",
+                      "Haid & Ramadhan",
+                      [
+                        "assets/infographics/ramadhan_1.png",
+                        "assets/infographics/ramadhan_2.png",
+                        "assets/infographics/ramadhan_3.png",
+                        "assets/infographics/ramadhan_4.png",
+                        "assets/infographics/ramadhan_5.png",
+                        "assets/infographics/ramadhan_6.png",
+                        "assets/infographics/ramadhan_.png",
+                      ],
+                      "Wanita yang sedang haid tidak diwajibkan berpuasa dan haram baginya berpuasa. Puasa yang ditinggalkan wajib diganti (qada') pada hari lain selepas suci, tetapi solat yang ditinggalkan tidak perlu diganti.",
                       false,
+                      pesanUstazah:
+                          "Pada bulan yang Mulia, kalau datang haid, adik tak boleh puasa dan tak perlu solat. Tapi jangan sedih, pahala niat puasa tetap ada. Nanti lepas suci, ganti balik puasa tu ya. Allah itu Maha Mengetahui keadaan kita 🤲",
                     ),
                     _buildMenuCard(
                       context,
@@ -94,8 +118,10 @@ class IslamScreen extends StatelessWidget {
                         "assets/infographics/jenis_darah_6.png",
                       ],
 
-                      "Penerangan jenis darah...",
+                      "Dalam syarak, darah yang keluar dari faraj dibahagikan kepada tiga: Haid, Istihadah dan Nifas. Setiap jenis darah ada hukum dan peraturan ibadah yang berbeza-beza, jadi penting untuk kenal bezanya.",
                       false,
+                      pesanUstazah:
+                          "Bukan semua darah yang keluar tu dikira haid tau adik-adik. Ada darah penyakit, ada darah nifas. Kalau salah anggap, nanti ibadah jadi tak betul. Belajar beza dia elok-elok kat sini ya 🩸",
                     ),
                     _buildMenuCard(
                       context,
@@ -109,8 +135,10 @@ class IslamScreen extends StatelessWidget {
                         "assets/infographics/tanda_suci_6.png",
                       ],
 
-                      "Penerangan cara bersuci...",
+                      "Tanda utama wanita suci daripada haid adalah berhenti sepenuhnya pengeluaran darah atau lendir, dan biasanya disusuli dengan keluarnya cairan putih jernih. Apabila sudah suci, wajib segera mandi wajib untuk menyambung kembali ibadah.",
                       false,
+                      pesanUstazah:
+                          "Bila darah dah berhenti dan keluar cecair putih jernih, itu tanda adik dah suci. Segera mandi wajib supaya boleh kembali dekat dengan Allah, solat dan baca Al-Quran semula. Jangan tangguh-tangguh ya ✨",
                     ),
                   ],
                 ),
@@ -130,6 +158,7 @@ class IslamScreen extends StatelessWidget {
     String desc,
     bool isVideo, {
     String videoPath = "",
+    String pesanUstazah = "",
   }) {
     return GestureDetector(
       onTap: () {
@@ -141,6 +170,7 @@ class IslamScreen extends StatelessWidget {
               description: desc,
               videoPath: videoPath,
               imagePaths: imagePaths,
+              ustazahMessage: pesanUstazah,
               isVideo: isVideo,
             ),
           ),

@@ -56,7 +56,7 @@ class KenaliScreen extends StatelessWidget {
                         "assets/infographics/emosi1_haid.png",
                         "assets/infographics/emosi2_haid.png",
                       ],
-                      "Penerangan emosi ketika haid...",
+                      "Semasa haid, perubahan hormon boleh membuatkan emosi adik-adik jadi tidak stabil, cepat marah, sedih atau mudah menangis. Ini semua perkara biasa dan dialami hampir semua wanita.",
                       false,
                       pesanUstazah:
                           "Jangan risau kalau hati rasa tak sedap atau cepat merajuk waktu haid ya. Itu kesan hormon, bukan salah adik. Bertenang, rehat secukupnya dan buat benda yang menggembirakan hati 💕",
@@ -67,7 +67,7 @@ class KenaliScreen extends StatelessWidget {
                       context,
                       "Apa itu kitaran haid",
                       "assets/images/kiataran_haid.png",
-                      "Kitaran haid ialah...",
+                      "Kitaran haid adalah proses bermula dari hari pertama darah keluar sehingga hari pertama haid bulan berikutnya.",
                       true, // TRUE sebab ada video
                       videoPath: "assets/videos/kitaran_haid.mp4",
                       pesanUstazah:
@@ -78,7 +78,7 @@ class KenaliScreen extends StatelessWidget {
                       context,
                       "Jenis produk haid",
                       "assets/infographics/period_products.png",
-                      "Berikut adalah jenis-jenis produk...",
+                      "Terdapat pelbagai jenis produk kebersihan wanita seperti tuala wanita, tampon, cawan haid dan seluar haid. Setiap satu ada cara penggunaan dan kelebihan tersendiri mengikut keselesaan masing-masing.",
                       true, // TRUE sebab ada video
                       videoPath: "assets/videos/Period_products.mp4",
                       pesanUstazah:
@@ -89,7 +89,7 @@ class KenaliScreen extends StatelessWidget {
                       context,
                       "kebersihan ketika haid",
                       "assets/images/penjagaan.png",
-                      "Penerangan tentang penjagaan...",
+                      "Menjaga kebersihan diri semasa haid adalah wajib. Pastikan menukar tuala wanita setiap 4 hingga 6 jam, membersihkan alat sulit dengan cara yang betul dan kerap membasuh tangan.",
                       true, // TRUE sebab ada video
                       videoPath: "assets/videos/penjagaan_kebersihan.mp4",
                       pesanUstazah:
@@ -102,7 +102,7 @@ class KenaliScreen extends StatelessWidget {
                         "assets/infographics/period_food1.png",
                         "assets/infographics/period_food2.png",
                       ],
-                      "Penerangan tentang makanan yang patut dielakkan dan patut dimakan..",
+                      "Semasa haid, badan perlukan nutrisi yang baik. Amalkan makanan kaya zat besi, buah-buahan dan air kosong. Kurangkan makanan berlemak, terlalu manis atau berkafein untuk kurangkan rasa sakit perut.",
                       false,
                       pesanUstazah:
                           "Jaga pemakanan masa haid ni sangat bagus untuk kurangkan rasa lenguh atau sakit. Banyakkan minum air kosong dan makan benda sihat ya, supaya badan kekal bertenaga 💪🍎",
@@ -122,7 +122,7 @@ class KenaliScreen extends StatelessWidget {
                         "assets/infographics/body_change_8.png",
                         "assets/infographics/body_change_9.png",
                       ],
-                      "Kenapa badan kita berubah...",
+                      "Haid adalah tanda kematangan diri. Selepas mula haid, badan akan mengalami banyak perubahan fizikal seperti bentuk badan, tumbuh rambut halus, dan perubahan suara. Ini semua proses menjadi dewasa.",
                       false,
                       pesanUstazah:
                           "Semua perubahan pada badan ni tanda adik-adik sedang membesar dan matang. Jangan malu atau risau, itu cara Allah jadikan wanita makin cantik dan sempurna ciptaan-Nya 🌷",
