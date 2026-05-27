@@ -50,11 +50,11 @@ class _NavigationScreenState extends State<NavigationScreen> {
               items: const [
                 BottomNavigationBarItem(icon: Icon(Icons.home), label: "Home"),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.favorite),
+                  icon: Icon(Icons.filter_vintage_rounded),
                   label: "Kenali",
                 ),
                 BottomNavigationBarItem(
-                  icon: Icon(Icons.menu_book),
+                  icon: Icon(Icons.brightness_4),
                   label: "Islam",
                 ),
                 BottomNavigationBarItem(icon: Icon(Icons.games), label: "Kuiz"),

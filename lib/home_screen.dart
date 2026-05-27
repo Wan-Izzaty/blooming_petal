@@ -80,7 +80,7 @@ class HomeScreen extends StatelessWidget {
                 mainAxisSpacing: 15,
                 children: [
                   menuButton(
-                    icon: Icons.favorite,
+                    icon: Icons.filter_vintage_rounded,
                     title: "Kenali Haid Anda",
                     onTap: () {
                       onTabChange?.call(
@@ -89,7 +89,7 @@ class HomeScreen extends StatelessWidget {
                     },
                   ),
                   menuButton(
-                    icon: Icons.menu_book,
+                    icon: Icons.brightness_4,
                     title: "Panduan Islam",
                     onTap: () {
                       onTabChange?.call(
