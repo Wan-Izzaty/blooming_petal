@@ -17,7 +17,7 @@ class _IslamScreenState extends State<IslamScreen> {
   final List<Map<String, dynamic>> senaraiTopikIslamik = [
     {
       "title": "Zikir & Doa",
-      "image": "assets/images/zikir_doa.png", // Pastikan gambar ada
+      "image": "assets/images/zikir_dan_doa.jpeg",
       "desc":
           "Koleksi zikir dan doa harian, sesuai diamalkan ketika haid untuk ketenangan hati dan kesihatan badan.",
       "isVideo": false,
@@ -25,7 +25,6 @@ class _IslamScreenState extends State<IslamScreen> {
       "videoPath": "",
       "ustazahPesan":
           "Bacalah zikir dan doa ni selalu ya adik-adik. Bila hati rapat dengan Allah, badan pun rasa tenang dan sihat ❤️",
-      // ✅ DATA LENGKAP DOA (ARAB, RUMI, MAKSUD, FAIL AUDIO)
       "senaraiDoa": [
         {
           "nama": "Zikir Tasbih",
@@ -34,7 +33,7 @@ class _IslamScreenState extends State<IslamScreen> {
           "rumi": "Subhanallah, Alhamdulillah, La ilaha illallah, Allahu Akbar",
           "maksud":
               "Maha Suci Allah, Segala Puji bagi Allah, Tiada Tuhan selain Allah, Allah Maha Besar.",
-          "audio": "audio/zikir_tasbih.mp3", // ✅ Fail mp3 awak
+          "audio": "audio/zikir_tasbih.mp3",
         },
         {
           "nama": "Istighfar",
@@ -75,7 +74,7 @@ class _IslamScreenState extends State<IslamScreen> {
     },
     {
       "title": "Mandi wajib",
-      "image": "assets/images/mandi.png",
+      "image": "assets/images/ghusl.jpeg",
       "desc":
           "Mandi wajib adalah satu ibadah mensucikan diri daripada hadas besar. Ia wajib dilakukan apabila darah haid berhenti sepenuhnya supaya dibolehkan melakukan ibadah seperti solat dan membaca Al-Quran.",
       "isVideo": true,
@@ -221,6 +220,7 @@ class _IslamScreenState extends State<IslamScreen> {
                           return _buildMenuCard(
                             context,
                             topik["title"],
+                            topik["thumbnail"],
                             topik["image"],
                             topik["desc"],
                             topik["isVideo"],
@@ -243,6 +243,7 @@ class _IslamScreenState extends State<IslamScreen> {
   Widget _buildMenuCard(
     BuildContext context,
     String title,
+    String thumbnail,
     dynamic imagePaths,
     String desc,
     bool isVideo, {
@@ -280,9 +281,19 @@ class _IslamScreenState extends State<IslamScreen> {
           children: [
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(8.0),
+                padding: const EdgeInsets.all(15.0),
                 // ✅ TUKAR: Daripada Icon, jadi GAMBAR (ikut gambar dalam data)
-                child: Icon(Icons.mosque, size: 50, color: Colors.pink),
+                child: Image.asset(
+                  thumbnail,
+                  fit: BoxFit.contain,
+                  errorBuilder: (context, error, stackTrace) {
+                    return const Icon(
+                      Icons.mosque,
+                      size: 50,
+                      color: Colors.pink,
+                    );
+                  },
+                ),
               ),
             ),
             const SizedBox(height: 5),
