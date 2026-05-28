@@ -16,11 +16,11 @@ class BackgroundWrapper extends StatelessWidget {
           // 🌸 Bunga Kiri Atas
           Positioned(
             top: -20,
-            left: -20,
+            left: -60,
             child: Opacity(
-              opacity: 0.65,
+              opacity: 0.30,
               child: Image.asset(
-                'assets/images/flower1.png',
+                'assets/images/bunga purple.png',
                 width: 180,
                 fit: BoxFit.contain,
               ),
@@ -29,13 +29,26 @@ class BackgroundWrapper extends StatelessWidget {
 
           // 🌸 BUNGA ATAS KANAN
           Positioned(
-            top: 30,
-            right: -30,
+            top: 10,
+            right: 10,
             child: Opacity(
-              opacity: 0.65,
+              opacity: 0.30,
               child: Image.asset(
-                'assets/images/flower2.png',
-                width: 150,
+                'assets/images/bunga merah.png',
+                width: 100,
+                fit: BoxFit.contain,
+              ),
+            ),
+          ),
+          //Bunga kuning tengah tengah
+          Positioned(
+            top: 200,
+            right: -50,
+            child: Opacity(
+              opacity: 0.60,
+              child: Image.asset(
+                'assets/images/bunga kuning.png',
+                width: 130,
                 fit: BoxFit.contain,
               ),
             ),
@@ -43,13 +56,13 @@ class BackgroundWrapper extends StatelessWidget {
 
           // 🌸 BUNGA BAWAH KIRI
           Positioned(
-            bottom: 50,
-            left: -10,
+            bottom: 30,
+            left: -60,
             child: Opacity(
-              opacity: 0.95,
+              opacity: 0.30,
               child: Image.asset(
-                'assets/images/flower3.png',
-                width: 160,
+                'assets/images/bunga merah.png',
+                width: 140,
                 fit: BoxFit.contain,
               ),
             ),
@@ -57,26 +70,19 @@ class BackgroundWrapper extends StatelessWidget {
 
           // 🌸 BUNGA BAWAH KANAN
           Positioned(
-            bottom: 80,
-            right: -20,
+            bottom: 70,
+            right: -55,
             child: Opacity(
-              opacity: 0.65,
+              opacity: 0.30,
               child: Image.asset(
-                'assets/images/flower4.png',
+                'assets/images/bunga pink.png',
                 width: 200,
                 fit: BoxFit.contain,
               ),
             ),
           ),
 
-          // ❤️ SINI PUNCANYA: Kita buang GestureDetector hantu tadi.
-          // Guna Positioned.fill dibalut dengan SafeArea sahaja dah cukup untuk hidupkan butang bawah dia.
-          Positioned.fill(
-            child: SafeArea(
-              child:
-                  child, // <-- Menu & butang HomeScreen / LoginScreen duduk sini dengan aman
-            ),
-          ),
+          Positioned.fill(child: SafeArea(child: child)),
         ],
       ),
     );
