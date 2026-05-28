@@ -220,7 +220,6 @@ class _IslamScreenState extends State<IslamScreen> {
                           return _buildMenuCard(
                             context,
                             topik["title"],
-                            topik["thumbnail"],
                             topik["image"],
                             topik["desc"],
                             topik["isVideo"],
@@ -243,7 +242,6 @@ class _IslamScreenState extends State<IslamScreen> {
   Widget _buildMenuCard(
     BuildContext context,
     String title,
-    String thumbnail,
     dynamic imagePaths,
     String desc,
     bool isVideo, {
@@ -284,7 +282,7 @@ class _IslamScreenState extends State<IslamScreen> {
                 padding: const EdgeInsets.all(15.0),
                 // ✅ TUKAR: Daripada Icon, jadi GAMBAR (ikut gambar dalam data)
                 child: Image.asset(
-                  thumbnail,
+                  imagePaths is List ? imagePaths[0] : imagePaths,
                   fit: BoxFit.contain,
                   errorBuilder: (context, error, stackTrace) {
                     return const Icon(
