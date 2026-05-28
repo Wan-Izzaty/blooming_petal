@@ -15,6 +15,7 @@ class _KenaliScreenState extends State<KenaliScreen> {
   final List<Map<String, dynamic>> senaraiTopik = [
     {
       "title": "Emosi ketika haid",
+      "thumbnail": "assets/images/period_emotion.jpeg",
       "image": [
         "assets/infographics/emosi1_haid.png",
         "assets/infographics/emosi2_haid.png",
@@ -28,6 +29,7 @@ class _KenaliScreenState extends State<KenaliScreen> {
     },
     {
       "title": "Apa itu kitaran haid",
+      "thumbnail": "assets/images/get_to_know_your_period.jpeg",
       "image": "assets/images/kiataran_haid.png",
       "desc":
           "Kitaran haid adalah proses bermula dari hari pertama darah keluar sehingga hari pertama haid bulan berikutnya. Purata kitaran normal adalah sekitar 21 hingga 35 hari.",
@@ -38,6 +40,7 @@ class _KenaliScreenState extends State<KenaliScreen> {
     },
     {
       "title": "Jenis produk haid",
+      "thumbnail": "assets/images/period_products.jpeg",
       "image": "assets/infographics/period_products.png",
       "desc":
           "Terdapat pelbagai jenis produk kebersihan wanita seperti tuala wanita, tampon, cawan haid dan seluar haid. Setiap satu ada cara penggunaan dan kelebihan tersendiri mengikut keselesaan masing-masing.",
@@ -48,6 +51,7 @@ class _KenaliScreenState extends State<KenaliScreen> {
     },
     {
       "title": "kebersihan ketika haid",
+      "thumbnail": "assets/images/period_hygiene.jpeg",
       "image": "assets/images/penjagaan.png",
       "desc":
           "Menjaga kebersihan diri semasa haid adalah wajib. Pastikan menukar tuala wanita setiap 4 hingga 6 jam, membersihkan alat sulit dengan cara yang betul dan kerap membasuh tangan.",
@@ -58,6 +62,7 @@ class _KenaliScreenState extends State<KenaliScreen> {
     },
     {
       "title": "Makanan semasa haid",
+      "thumbnail": "assets/images/period_food.jpeg",
       "image": [
         "assets/infographics/period_food1.png",
         "assets/infographics/period_food2.png",
@@ -71,6 +76,7 @@ class _KenaliScreenState extends State<KenaliScreen> {
     },
     {
       "title": "Perubahan badan setelah haid",
+      "thumbnail": "assets/images/body_change.jpeg",
       "image": [
         "assets/infographics/body_change_1.png",
         "assets/infographics/body_change_2.png",
@@ -157,6 +163,7 @@ class _KenaliScreenState extends State<KenaliScreen> {
                           return _buildMenuCard(
                             context,
                             topik["title"],
+                            topik["thumbnail"],
                             topik["image"],
                             topik["desc"],
                             topik["isVideo"],
@@ -177,12 +184,19 @@ class _KenaliScreenState extends State<KenaliScreen> {
   Widget _buildMenuCard(
     BuildContext context,
     String title,
+    dynamic thumbnail,
     dynamic imagePaths,
     String desc,
     bool isVideo, {
     String videoPath = "",
     String pesanUstazah = "",
   }) {
+    String? thumbnailPath;
+    if (thumbnail is List && thumbnail.isNotEmpty) {
+      thumbnailPath = thumbnail[0];
+    } else if (thumbnail is String) {
+      thumbnailPath = thumbnail;
+    }
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -211,7 +225,22 @@ class _KenaliScreenState extends State<KenaliScreen> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(8.0),
-                child: Icon(Icons.local_florist, size: 50, color: Colors.pink),
+                child: (thumbnailPath != null && thumbnailPath.isNotEmpty)
+                    ? Image.asset(
+                        thumbnailPath,
+                        fit: BoxFit.contain,
+                        errorBuilder: (context, error, stackTrace) =>
+                            const Icon(
+                              Icons.local_florist,
+                              size: 60,
+                              color: Colors.pink,
+                            ),
+                      )
+                    : const Icon(
+                        Icons.local_florist,
+                        size: 60,
+                        color: Colors.pink,
+                      ),
               ),
             ),
             const SizedBox(height: 5),

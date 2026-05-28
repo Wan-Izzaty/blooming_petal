@@ -17,7 +17,8 @@ class _IslamScreenState extends State<IslamScreen> {
   final List<Map<String, dynamic>> senaraiTopikIslamik = [
     {
       "title": "Zikir & Doa",
-      "image": "assets/images/zikir_dan_doa.jpeg",
+      "thumbnail": "assets/images/zikir_dan_doa.jpeg",
+      "image": "assets/images/zikir_dan_doa.png",
       "desc":
           "Koleksi zikir dan doa harian, sesuai diamalkan ketika haid untuk ketenangan hati dan kesihatan badan.",
       "isVideo": false,
@@ -74,7 +75,8 @@ class _IslamScreenState extends State<IslamScreen> {
     },
     {
       "title": "Mandi wajib",
-      "image": "assets/images/ghusl.jpeg",
+      "thumbnail": "assets/images/ghusl.jpeg",
+      "image": "assets/images/ghusl.png",
       "desc":
           "Mandi wajib adalah satu ibadah mensucikan diri daripada hadas besar. Ia wajib dilakukan apabila darah haid berhenti sepenuhnya supaya dibolehkan melakukan ibadah seperti solat dan membaca Al-Quran.",
       "isVideo": true,
@@ -85,6 +87,7 @@ class _IslamScreenState extends State<IslamScreen> {
     },
     {
       "title": "Peralihan alam baligh",
+      "thumbnail": "assets/images/akil_baligh_peralihan.jpeg",
       "image": [
         "assets/infographics/akil_baligh_1.png",
         "assets/infographics/akil_baligh_2.png",
@@ -104,6 +107,7 @@ class _IslamScreenState extends State<IslamScreen> {
     },
     {
       "title": "Haid & Ramadhan",
+      "thumbnail": "assets/images/ramadhan.jpeg",
       "image": [
         "assets/infographics/ramadhan_1.png",
         "assets/infographics/ramadhan_2.png",
@@ -123,6 +127,7 @@ class _IslamScreenState extends State<IslamScreen> {
     },
     {
       "title": "Kenali jenis darah",
+      "thumbnail": "assets/images/period_colors.jpeg",
       "image": [
         "assets/infographics/jenis_darah_1.png",
         "assets/infographics/jenis_darah_2.png",
@@ -141,6 +146,7 @@ class _IslamScreenState extends State<IslamScreen> {
     },
     {
       "title": "Tanda suci dari haid",
+      "thumbnail": "assets/images/tanda_haid_tamat.jpeg",
       "image": [
         "assets/infographics/tanda_suci_1.png",
         "assets/infographics/tanda_suci_2.png",
@@ -220,6 +226,7 @@ class _IslamScreenState extends State<IslamScreen> {
                           return _buildMenuCard(
                             context,
                             topik["title"],
+                            topik["thumbnail"],
                             topik["image"],
                             topik["desc"],
                             topik["isVideo"],
@@ -242,6 +249,7 @@ class _IslamScreenState extends State<IslamScreen> {
   Widget _buildMenuCard(
     BuildContext context,
     String title,
+    dynamic thumbnail,
     dynamic imagePaths,
     String desc,
     bool isVideo, {
@@ -250,6 +258,13 @@ class _IslamScreenState extends State<IslamScreen> {
     bool isAudio = false, // ✅ TAMBAH NI
     List<dynamic>? senaraiDoa,
   }) {
+    String? thumbnailPath;
+    if (thumbnail is List && thumbnail.isNotEmpty) {
+      thumbnailPath = thumbnail[0];
+    } else if (thumbnail is String) {
+      thumbnailPath = thumbnail;
+    }
+
     return GestureDetector(
       onTap: () {
         Navigator.push(
@@ -280,18 +295,18 @@ class _IslamScreenState extends State<IslamScreen> {
             Expanded(
               child: Padding(
                 padding: const EdgeInsets.all(15.0),
-                // ✅ TUKAR: Daripada Icon, jadi GAMBAR (ikut gambar dalam data)
-                child: Image.asset(
-                  imagePaths is List ? imagePaths[0] : imagePaths,
-                  fit: BoxFit.contain,
-                  errorBuilder: (context, error, stackTrace) {
-                    return const Icon(
-                      Icons.mosque,
-                      size: 50,
-                      color: Colors.pink,
-                    );
-                  },
-                ),
+                child: (thumbnailPath != null && thumbnailPath.isNotEmpty)
+                    ? Image.asset(
+                        thumbnailPath,
+                        fit: BoxFit.contain,
+                        errorBuilder: (context, error, stackTrace) =>
+                            const Icon(
+                              Icons.mosque,
+                              size: 60,
+                              color: Colors.pink,
+                            ),
+                      )
+                    : const Icon(Icons.mosque, size: 60, color: Colors.pink),
               ),
             ),
             const SizedBox(height: 5),
