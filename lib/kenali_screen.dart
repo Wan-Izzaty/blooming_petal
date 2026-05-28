@@ -99,8 +99,6 @@ class _KenaliScreenState extends State<KenaliScreen> {
 
   @override
   Widget build(BuildContext context) {
-    // ✅ FUNGSI CARIAN: TAPIS SENARAI MENGIKUT APA YANG DITAIK
-    // Kita tukar semua ke huruf kecil supaya tak sensitif huruf besar/kecil
     List<Map<String, dynamic>> hasilCarian = senaraiTopik.where((topik) {
       return topik["title"].toLowerCase().contains(kataKunci.toLowerCase());
     }).toList();

@@ -245,7 +245,6 @@ class _IslamScreenState extends State<IslamScreen> {
     );
   }
 
-  // ✅ FUNGSI BINA KOTAK (SAMA PERSIS, TAK PERLU UBAH)
   Widget _buildMenuCard(
     BuildContext context,
     String title,
