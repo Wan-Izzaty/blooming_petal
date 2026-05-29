@@ -17,8 +17,12 @@ class _KenaliScreenState extends State<KenaliScreen> {
       "title": "Emosi ketika haid",
       "thumbnail": "assets/images/period_emotion.jpeg",
       "image": [
-        "assets/infographics/emosi1_haid.png",
-        "assets/infographics/emosi2_haid.png",
+        //"assets/infographics/emosi1_haid.png",//
+        //"assets/infographics/emosi2_haid.png",
+        "assets/infographics/emosi_1.jpeg",
+        "assets/infographics/emosi_2.jpeg",
+        "assets/infographics/emosi_3.jpeg",
+        "assets/infographics/emosi_4.jpeg",
       ],
       "desc":
           "Semasa haid, perubahan hormon boleh membuatkan emosi adik-adik jadi tidak stabil, cepat marah, sedih atau mudah menangis. Ini semua perkara biasa dan dialami hampir semua wanita.",
@@ -64,8 +68,12 @@ class _KenaliScreenState extends State<KenaliScreen> {
       "title": "Makanan semasa haid",
       "thumbnail": "assets/images/period_food.jpeg",
       "image": [
-        "assets/infographics/period_food1.png",
-        "assets/infographics/period_food2.png",
+        //"assets/infographics/period_food1.png",
+        //"assets/infographics/period_food2.png",
+        "assets/infographics/makanan_1.jpeg",
+        "assets/infographics/makanan_2.jpeg",
+        "assets/infographics/makanan_3.jpeg",
+        "assets/infographics/makanan_4.jpeg",
       ],
       "desc":
           "Semasa haid, badan perlukan nutrisi yang baik. Amalkan makanan kaya zat besi, buah-buahan dan air kosong. Kurangkan makanan berlemak, terlalu manis atau berkafein untuk kurangkan rasa sakit perut.",
