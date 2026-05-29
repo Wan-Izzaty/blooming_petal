@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'background_screen.dart'; // ✅ IMPORT LATAR BELAKANG BUNGA
+import 'tetapan_screen.dart'; // ✅ IMPORT SKRIN TETAPAN BARU KITA
 
 class HomeScreen extends StatelessWidget {
   final Function(int index)? onTabChange;
@@ -15,11 +16,10 @@ class HomeScreen extends StatelessWidget {
       onTap: onTap,
       behavior: HitTestBehavior.opaque,
       child: Container(
-        // ✅ Saya tambah Opacity sikit supaya bunga belakang nampak, nampak lagi cantik
         decoration: BoxDecoration(
           color: Colors.white.withOpacity(
             0.85,
-          ), // ❤️ Nilaian ni boleh ubah 0.8 - 1.0
+          ), // ❤️ Nilaian opacity latar belakang
           borderRadius: BorderRadius.circular(20),
           boxShadow: const [
             BoxShadow(
@@ -48,8 +48,8 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    // 🌸 Menukar BackgroundWrapper kepada BackgroundScreen mengikut nama kelas fail kita
     return BackgroundWrapper(
-      // ❌ Tak ada AppBar, bersih macam awak nak
       child: Padding(
         padding: const EdgeInsets.all(16),
         child: Column(
@@ -59,10 +59,7 @@ class HomeScreen extends StatelessWidget {
             // Bahagian Hi User
             Row(
               children: const [
-                CircleAvatar(
-                  // Ikut gaya kotak
-                  child: Icon(Icons.person, color: Colors.pink),
-                ),
+                CircleAvatar(child: Icon(Icons.person, color: Colors.pink)),
                 SizedBox(width: 10),
                 Text(
                   "Hi, Welcome Back 🌸",
@@ -83,33 +80,37 @@ class HomeScreen extends StatelessWidget {
                     icon: Icons.filter_vintage_rounded,
                     title: "Kenali Haid Anda",
                     onTap: () {
-                      onTabChange?.call(
-                        1,
-                      ); // ✅ Fungsi tukar tab JALAN MACAM BIASA
+                      onTabChange?.call(1); // Tukar ke Tab 1
                     },
                   ),
                   menuButton(
                     icon: Icons.brightness_4,
                     title: "Panduan Islam",
                     onTap: () {
-                      onTabChange?.call(
-                        2,
-                      ); // ✅ Fungsi tukar tab JALAN MACAM BIASA
+                      onTabChange?.call(2); // Tukar ke Tab 2
                     },
                   ),
                   menuButton(
                     icon: Icons.games,
                     title: "Kuiz",
                     onTap: () {
-                      onTabChange?.call(
-                        3,
-                      ); // ✅ Fungsi tukar tab JALAN MACAM BIASA
+                      onTabChange?.call(3); // Tukar ke Tab 3
                     },
                   ),
+
+                  // 🔘 BUTANG TETAPAN DIUBAH SINI:
                   menuButton(
                     icon: Icons.settings,
                     title: "Tetapan",
-                    onTap: () {},
+                    onTap: () {
+                      // Buka SettingsScreen sebagai halaman baru di atas skrin semasa
+                      Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                          builder: (_) => const TetapanScreen(),
+                        ),
+                      );
+                    },
                   ),
                 ],
               ),
