@@ -314,7 +314,7 @@ class _QuizSoalanState extends State<QuizSoalan> {
                       ? "Kuiz (General) 📚"
                       : "Kuiz (Islamic) 🕌",
                   style: const TextStyle(
-                    fontSize: 22,
+                    fontSize: 30,
                     fontWeight: FontWeight.bold,
                   ),
                 ),
@@ -333,7 +333,7 @@ class _QuizSoalanState extends State<QuizSoalan> {
               ),
               child: Text(
                 "${nomborSoalan + 1}. ${senaraiSoalan[nomborSoalan]['soalan']}",
-                style: const TextStyle(fontSize: 16, height: 1.5),
+                style: const TextStyle(fontSize: 17, height: 1.5),
               ),
             ),
 
@@ -369,7 +369,7 @@ class _QuizSoalanState extends State<QuizSoalan> {
                       Text(
                         senaraiSoalan[nomborSoalan]['pilihan'][index],
                         style: const TextStyle(
-                          fontSize: 14,
+                          fontSize: 17,
                           height: 1.4, // Jarak antara baris teks
                         ),
                         textAlign: TextAlign.left, // Tulis dari kiri
@@ -399,7 +399,7 @@ class _QuizSoalanState extends State<QuizSoalan> {
                 ),
                 child: const Text(
                   "Next",
-                  style: TextStyle(fontWeight: FontWeight.bold),
+                  style: TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
                 ),
               ),
             ),
@@ -445,6 +445,7 @@ class HalamanSemakanJawapan extends StatelessWidget {
                 style: TextStyle(
                   color: Colors.black,
                   fontWeight: FontWeight.bold,
+                  fontSize: 17,
                 ),
               ),
             ),
@@ -477,7 +478,7 @@ class HalamanSemakanJawapan extends StatelessWidget {
                     "${index + 1}. ${soalan['soalan']}",
                     style: const TextStyle(
                       fontWeight: FontWeight.bold,
-                      fontSize: 14,
+                      fontSize: 17,
                     ),
                   ),
                   const SizedBox(height: 8),
@@ -490,6 +491,7 @@ class HalamanSemakanJawapan extends StatelessWidget {
                           ? Colors.green.shade700
                           : Colors.red.shade700,
                       fontWeight: FontWeight.w500,
+                      fontSize: 17,
                     ),
                   ),
 

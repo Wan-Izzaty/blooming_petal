@@ -115,7 +115,11 @@ class _KenaliScreenState extends State<KenaliScreen> {
       appBar: AppBar(
         title: const Text(
           "Kenali haid Anda",
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 30,
+          ),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -157,13 +161,13 @@ class _KenaliScreenState extends State<KenaliScreen> {
                     ? const Center(
                         child: Text(
                           "Topik tidak dijumpai 😔",
-                          style: TextStyle(fontSize: 16, color: Colors.grey),
+                          style: TextStyle(fontSize: 20, color: Colors.grey),
                         ),
                       )
                     // Kalau ada hasil, tunjuk dalam grid
                     : GridView.count(
                         crossAxisCount: 2,
-                        crossAxisSpacing: 15,
+                        crossAxisSpacing: 20,
                         mainAxisSpacing: 15,
                         children: hasilCarian.map((topik) {
                           return _buildMenuCard(
@@ -253,7 +257,7 @@ class _KenaliScreenState extends State<KenaliScreen> {
             Text(
               title,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
             ),
             const SizedBox(height: 10),
           ],

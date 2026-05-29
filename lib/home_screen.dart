@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'background_screen.dart'; // ✅ IMPORT LATAR BELAKANG BUNGA
-import 'tetapan_screen.dart'; // ✅ IMPORT SKRIN TETAPAN BARU KITA
+import 'background_screen.dart';
+import 'tentang_screen.dart';
 
 class HomeScreen extends StatelessWidget {
   final Function(int index)? onTabChange;
@@ -33,12 +33,12 @@ class HomeScreen extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           children: [
-            Icon(icon, size: 45, color: Colors.pink),
+            Icon(icon, size: 50, color: Colors.pink),
             const SizedBox(height: 10),
             Text(
               title,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 20),
             ),
           ],
         ),
@@ -59,11 +59,9 @@ class HomeScreen extends StatelessWidget {
             // Bahagian Hi User
             Row(
               children: const [
-                CircleAvatar(child: Icon(Icons.person, color: Colors.pink)),
-                SizedBox(width: 10),
                 Text(
-                  "Hi, Welcome Back 🌸",
-                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                  "🌸 Hi, Welcome Back 🌸",
+                  style: TextStyle(fontSize: 35, fontWeight: FontWeight.bold),
                 ),
               ],
             ),
@@ -84,14 +82,14 @@ class HomeScreen extends StatelessWidget {
                     },
                   ),
                   menuButton(
-                    icon: Icons.brightness_4,
+                    icon: Icons.brightness_4_rounded,
                     title: "Panduan Islam",
                     onTap: () {
                       onTabChange?.call(2); // Tukar ke Tab 2
                     },
                   ),
                   menuButton(
-                    icon: Icons.games,
+                    icon: Icons.games_rounded,
                     title: "Kuiz",
                     onTap: () {
                       onTabChange?.call(3); // Tukar ke Tab 3
@@ -100,14 +98,14 @@ class HomeScreen extends StatelessWidget {
 
                   // 🔘 BUTANG TETAPAN DIUBAH SINI:
                   menuButton(
-                    icon: Icons.settings,
-                    title: "Tetapan",
+                    icon: Icons.info_rounded,
+                    title: "Tentang Aplikasi",
                     onTap: () {
                       // Buka SettingsScreen sebagai halaman baru di atas skrin semasa
                       Navigator.push(
                         context,
                         MaterialPageRoute(
-                          builder: (_) => const TetapanScreen(),
+                          builder: (_) => const TentangScreen(),
                         ),
                       );
                     },

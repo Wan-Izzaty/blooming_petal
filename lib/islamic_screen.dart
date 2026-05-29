@@ -175,7 +175,11 @@ class _IslamScreenState extends State<IslamScreen> {
       appBar: AppBar(
         title: const Text(
           "Panduan Islam",
-          style: TextStyle(color: Colors.black, fontWeight: FontWeight.bold),
+          style: TextStyle(
+            color: Colors.black,
+            fontWeight: FontWeight.bold,
+            fontSize: 30,
+          ),
         ),
         backgroundColor: Colors.transparent,
         elevation: 0,
@@ -215,12 +219,12 @@ class _IslamScreenState extends State<IslamScreen> {
                     ? const Center(
                         child: Text(
                           "Topik tidak dijumpai 😔",
-                          style: TextStyle(fontSize: 16, color: Colors.grey),
+                          style: TextStyle(fontSize: 20, color: Colors.grey),
                         ),
                       )
                     : GridView.count(
                         crossAxisCount: 2,
-                        crossAxisSpacing: 15,
+                        crossAxisSpacing: 20,
                         mainAxisSpacing: 15,
                         children: hasilCarian.map((topik) {
                           return _buildMenuCard(
@@ -232,7 +236,7 @@ class _IslamScreenState extends State<IslamScreen> {
                             topik["isVideo"],
                             videoPath: topik["videoPath"],
                             ustazahPesan: topik["ustazahPesan"],
-                            isAudio: topik["isAudio"], // ✅ WAJIB LETAK NI
+                            isAudio: topik["isAudio"],
                             senaraiDoa: topik["senaraiDoa"],
                           );
                         }).toList(),
@@ -254,7 +258,7 @@ class _IslamScreenState extends State<IslamScreen> {
     bool isVideo, {
     String videoPath = "",
     String ustazahPesan = "",
-    bool isAudio = false, // ✅ TAMBAH NI
+    bool isAudio = false,
     List<dynamic>? senaraiDoa,
   }) {
     String? thumbnailPath;
@@ -293,7 +297,7 @@ class _IslamScreenState extends State<IslamScreen> {
           children: [
             Expanded(
               child: Padding(
-                padding: const EdgeInsets.all(15.0),
+                padding: const EdgeInsets.all(8.0),
                 child: (thumbnailPath != null && thumbnailPath.isNotEmpty)
                     ? Image.asset(
                         thumbnailPath,
@@ -312,7 +316,7 @@ class _IslamScreenState extends State<IslamScreen> {
             Text(
               title,
               textAlign: TextAlign.center,
-              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 13),
+              style: const TextStyle(fontWeight: FontWeight.bold, fontSize: 17),
             ),
             const SizedBox(height: 10),
           ],
