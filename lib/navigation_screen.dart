@@ -17,7 +17,6 @@ class _NavigationScreenState extends State<NavigationScreen> {
   @override
   Widget build(BuildContext context) {
     final List<Widget> pages = [
-      // Bila kat sini, kita hantar fungsi tukar page ke HomeScreen
       HomeScreen(
         onTabChange: (index) {
           setState(() {
@@ -33,9 +32,8 @@ class _NavigationScreenState extends State<NavigationScreen> {
     return Scaffold(
       body: pages[currentIndex],
 
-      // ✅ LOGIK PENTING: Navigation bar hanya muncul jika BUKAN page 0 (Home)
       bottomNavigationBar: currentIndex == 0
-          ? null // Kalau kat Home, bar jadi tiada
+          ? null
           : BottomNavigationBar(
               currentIndex: currentIndex,
               onTap: (index) {
@@ -44,7 +42,7 @@ class _NavigationScreenState extends State<NavigationScreen> {
                 });
               },
               type: BottomNavigationBarType.fixed,
-              backgroundColor: const Color(0xFF8E3B52), // Warna maroon awak
+              backgroundColor: const Color(0xFF8E3B52),
               selectedItemColor: Colors.yellow,
               unselectedItemColor: Colors.white,
               items: const [

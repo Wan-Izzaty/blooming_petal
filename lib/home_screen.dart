@@ -17,9 +17,7 @@ class HomeScreen extends StatelessWidget {
       behavior: HitTestBehavior.opaque,
       child: Container(
         decoration: BoxDecoration(
-          color: Colors.white.withOpacity(
-            0.85,
-          ), // ❤️ Nilaian opacity latar belakang
+          color: Colors.white.withOpacity(0.85),
           borderRadius: BorderRadius.circular(20),
           boxShadow: const [
             BoxShadow(
@@ -48,7 +46,6 @@ class HomeScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    // 🌸 Menukar BackgroundWrapper kepada BackgroundScreen mengikut nama kelas fail kita
     return BackgroundWrapper(
       child: Padding(
         padding: const EdgeInsets.all(16),
@@ -56,7 +53,6 @@ class HomeScreen extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             const SizedBox(height: 40), // Jarak dari atas skrin
-            // Bahagian Hi User
             Row(
               children: const [
                 Text(
@@ -67,7 +63,6 @@ class HomeScreen extends StatelessWidget {
             ),
             const SizedBox(height: 30),
 
-            // Grid Menu
             Expanded(
               child: GridView.count(
                 crossAxisCount: 2,
@@ -78,30 +73,29 @@ class HomeScreen extends StatelessWidget {
                     icon: Icons.filter_vintage_rounded,
                     title: "Kenali Haid Anda",
                     onTap: () {
-                      onTabChange?.call(1); // Tukar ke Tab 1
+                      onTabChange?.call(1);
                     },
                   ),
                   menuButton(
                     icon: Icons.brightness_4_rounded,
                     title: "Panduan Islam",
                     onTap: () {
-                      onTabChange?.call(2); // Tukar ke Tab 2
+                      onTabChange?.call(2);
                     },
                   ),
                   menuButton(
                     icon: Icons.games_rounded,
                     title: "Kuiz",
                     onTap: () {
-                      onTabChange?.call(3); // Tukar ke Tab 3
+                      onTabChange?.call(3);
                     },
                   ),
 
-                  // 🔘 BUTANG TETAPAN DIUBAH SINI:
+                  // TETAPAN
                   menuButton(
                     icon: Icons.info_rounded,
                     title: "Tentang Aplikasi",
                     onTap: () {
-                      // Buka SettingsScreen sebagai halaman baru di atas skrin semasa
                       Navigator.push(
                         context,
                         MaterialPageRoute(

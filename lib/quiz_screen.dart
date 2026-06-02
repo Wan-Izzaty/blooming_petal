@@ -24,7 +24,6 @@ class QuizScreen extends StatelessWidget {
             ),
             const SizedBox(height: 50),
 
-            // BUTANG GENERAL
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(
@@ -56,7 +55,6 @@ class QuizScreen extends StatelessWidget {
 
             const SizedBox(height: 20),
 
-            // BUTANG ISLAMIC
             SizedBox(
               width: double.infinity,
               child: ElevatedButton(

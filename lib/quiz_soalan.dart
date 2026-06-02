@@ -14,14 +14,12 @@ class _QuizSoalanState extends State<QuizSoalan> {
   int nomborSoalan = 0;
   int? jawapanDipilih;
   int jumlahSkor = 0;
-  // ✅ TAMBAH: Simpan semua jawapan pengguna untuk semakan nanti
   List<int?> senaraiJawapanPengguna = [];
 
   @override
   void initState() {
     super.initState();
     _siapkanSoalan();
-    // Reset senarai jawapan bila mula kuiz baru
     senaraiJawapanPengguna = List.filled(10, null);
   }
 
@@ -252,7 +250,6 @@ class _QuizSoalanState extends State<QuizSoalan> {
       return;
     }
 
-    // ✅ Simpan jawapan pengguna dalam senarai
     senaraiJawapanPengguna[nomborSoalan] = jawapanDipilih;
 
     if (jawapanDipilih == senaraiSoalan[nomborSoalan]['jawapanBetul']) {
@@ -262,11 +259,9 @@ class _QuizSoalanState extends State<QuizSoalan> {
     if (nomborSoalan < senaraiSoalan.length - 1) {
       setState(() {
         nomborSoalan++;
-        jawapanDipilih =
-            senaraiJawapanPengguna[nomborSoalan]; // Tunjuk balik apa yang dia pilih tadi kalau tekan belakang
+        jawapanDipilih = senaraiJawapanPengguna[nomborSoalan]; //
       });
     } else {
-      // ✅ TAMAT: PANGGIL HALAMAN SEMAKAN, BUKAN BALIK LANGSUNG
       Navigator.pushReplacement(
         context,
         MaterialPageRoute(
@@ -368,13 +363,9 @@ class _QuizSoalanState extends State<QuizSoalan> {
                     children: [
                       Text(
                         senaraiSoalan[nomborSoalan]['pilihan'][index],
-                        style: const TextStyle(
-                          fontSize: 17,
-                          height: 1.4, // Jarak antara baris teks
-                        ),
-                        textAlign: TextAlign.left, // Tulis dari kiri
-                        softWrap:
-                            true, // ✅ WAJIB ADA: Bagi teks patah ke baris baru
+                        style: const TextStyle(fontSize: 17, height: 1.4),
+                        textAlign: TextAlign.left,
+                        softWrap: true,
                         overflow: TextOverflow.visible, //
                       ),
                     ],
@@ -412,7 +403,6 @@ class _QuizSoalanState extends State<QuizSoalan> {
   }
 }
 
-// ✅ KELAS BARU: HALAMAN UNTUK TUNJUK SEMAKAN JAWAPAN
 class HalamanSemakanJawapan extends StatelessWidget {
   final List<Map<String, dynamic>> senaraiSoalan;
   final List<int?> senaraiJawapanPengguna;
@@ -438,7 +428,7 @@ class HalamanSemakanJawapan extends StatelessWidget {
           actions: [
             TextButton(
               onPressed: () {
-                Navigator.pop(context); // Balik ke menu utama kuiz
+                Navigator.pop(context);
               },
               child: const Text(
                 "Selesai",
@@ -483,7 +473,6 @@ class HalamanSemakanJawapan extends StatelessWidget {
                   ),
                   const SizedBox(height: 8),
 
-                  // Tunjuk Jawapan Pengguna
                   Text(
                     "Jawapan Anda: ${jawapanUser != null ? soalan['pilihan'][jawapanUser] : 'Tidak dijawab'}",
                     style: TextStyle(
@@ -495,7 +484,6 @@ class HalamanSemakanJawapan extends StatelessWidget {
                     ),
                   ),
 
-                  // Kalau salah, tunjukkan jawapan sebenar
                   if (!betulKeTak)
                     Text(
                       "Jawapan Betul: ${soalan['pilihan'][jawapanBetul]}",
@@ -509,7 +497,6 @@ class HalamanSemakanJawapan extends StatelessWidget {
             );
           },
         ),
-        // Tunjuk Markah di bawah sekali
         bottomNavigationBar: Container(
           padding: const EdgeInsets.all(20),
           color: Colors.pink.shade50,

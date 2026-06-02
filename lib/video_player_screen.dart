@@ -115,7 +115,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.stretch,
             children: [
-              // 🎥 VIDEO AREA
+              //VIDEO
               if (widget.isVideo && _controller != null)
                 Container(
                   margin: const EdgeInsets.all(15),
@@ -189,9 +189,8 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                           ),
                         ),
                 )
-              // 🖼️ GAMBAR / INFOGRAFIK
-              else if (!widget.isVideo &&
-                  !widget.isAudio) // ✅ Tambah !widget.isAudio kat sini
+              //INFOGRAFIK
+              else if (!widget.isVideo && !widget.isAudio)
                 Column(
                   children: [
                     Container(
@@ -244,7 +243,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                   ],
                 ),
 
-              // DOA & ZIKIR
+              //DOA & ZIKIR
               if (widget.isAudio && widget.senaraiDoa != null)
                 Padding(
                   padding: const EdgeInsets.symmetric(
@@ -300,7 +299,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                             ),
                             const Divider(height: 5),
 
-                            // ✅ TULISAN ARAB
                             Text(
                               doa['arab'],
                               textAlign: TextAlign.right,
@@ -312,7 +310,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                             ),
                             const SizedBox(height: 8),
 
-                            // ✅ TULISAN RUMI
                             Text(
                               doa['rumi'],
                               textAlign: TextAlign.center,
@@ -324,7 +321,6 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                             ),
                             const SizedBox(height: 10),
 
-                            // ✅ TERJEMAHAN
                             Container(
                               width: double.infinity,
                               padding: const EdgeInsets.all(10),
@@ -348,7 +344,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                   ),
                 ),
 
-              // 📖 PENERANGAN BIASA
+              //PENERANGAN BIASA
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 20,
@@ -372,7 +368,7 @@ class _VideoPlayerScreenState extends State<VideoPlayerScreen> {
                 ),
               ),
 
-              // USTAZAH ANIMASI
+              //USTAZAH
               Padding(
                 padding: const EdgeInsets.symmetric(
                   horizontal: 20,

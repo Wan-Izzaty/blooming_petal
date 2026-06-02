@@ -13,7 +13,7 @@ class BackgroundWrapper extends StatelessWidget {
       body: Stack(
         fit: StackFit.expand, // Kekalkan untuk penuhkan skrin
         children: [
-          // 🌸 Bunga Kiri Atas
+          // Bunga Kiri Atas
           Positioned(
             top: -20,
             left: -60,
@@ -27,7 +27,7 @@ class BackgroundWrapper extends StatelessWidget {
             ),
           ),
 
-          // 🌸 BUNGA ATAS KANAN
+          // BUNGA ATAS KANAN
           Positioned(
             top: 10,
             right: 10,
@@ -54,7 +54,7 @@ class BackgroundWrapper extends StatelessWidget {
             ),
           ),
 
-          // 🌸 BUNGA BAWAH KIRI
+          // BUNGA BAWAH KIRI
           Positioned(
             bottom: 30,
             left: -60,
@@ -68,7 +68,7 @@ class BackgroundWrapper extends StatelessWidget {
             ),
           ),
 
-          // 🌸 BUNGA BAWAH KANAN
+          // BUNGA BAWAH KANAN
           Positioned(
             bottom: 70,
             right: -55,

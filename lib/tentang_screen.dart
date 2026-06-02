@@ -55,7 +55,7 @@ class _TetapanScreenState extends State<TentangScreen> {
                             borderRadius: BorderRadius.circular(15),
                           ),
                           content: const Text(
-                            "1. Bahagian 'Kenali Haid Anda' untuk ilmu pengetahuan.\n2. Bahagian 'Panduan Islam' untuk panduan islamik. \n3. Bahagian 'Kuiz' untuk menguji kefahaman.\n3. Tetapkan saiz tulisan ikut keselesaan anda di sini.",
+                            "1. Bahagian 'Kenali Haid Anda' untuk ilmu pengetahuan.\n2. Bahagian 'Panduan Islam' untuk panduan islamik. \n3. Bahagian 'Kuiz' untuk menguji kefahaman.\n4. Tetapkan saiz tulisan ikut keselesaan anda di sini.",
                             textAlign: TextAlign.justify,
                           ),
                           actions: [
@@ -183,11 +183,11 @@ class _TetapanScreenState extends State<TentangScreen> {
 
             const SizedBox(height: 25),
 
-            // 🌸 LOGO
+            //LOGO
             Image.asset('assets/images/logo.png', height: 80),
             const SizedBox(height: 10),
 
-            // 📌 HAK CIPTA
+            //HAK CIPTA
             const Center(
               child: Text(
                 "© 2025 Blooming Petal | Aplikasi Pendidikan",

@@ -1,9 +1,8 @@
 import 'package:flutter/material.dart';
-import 'video_player_screen.dart'; // Pastikan import fail ni
+import 'video_player_screen.dart';
 import 'background_screen.dart';
 
 class IslamScreen extends StatefulWidget {
-  // ✅ StatefulWidget sama macam tadi
   const IslamScreen({super.key});
 
   @override
@@ -13,7 +12,6 @@ class IslamScreen extends StatefulWidget {
 class _IslamScreenState extends State<IslamScreen> {
   String kataKunci = "";
 
-  // ✅ NAK LETAK SINI: SENARAI PENUH TOPIK ISLAMIK
   final List<Map<String, dynamic>> senaraiTopikIslamik = [
     {
       "title": "Zikir & Doa",
@@ -190,7 +188,6 @@ class _IslamScreenState extends State<IslamScreen> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              // 🔎 KOTAK CARIAN (SAMA JE)
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 decoration: BoxDecoration(
@@ -213,7 +210,6 @@ class _IslamScreenState extends State<IslamScreen> {
               ),
               const SizedBox(height: 20),
 
-              // 📋 GRID VIEW
               Expanded(
                 child: hasilCarian.isEmpty
                     ? const Center(

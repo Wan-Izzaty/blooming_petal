@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'background_screen.dart'; // Import background bunga
-import 'video_player_screen.dart'; // Import skrin video
+import 'background_screen.dart';
+import 'video_player_screen.dart';
 
 class KenaliScreen extends StatefulWidget {
   const KenaliScreen({super.key});
@@ -130,7 +130,6 @@ class _KenaliScreenState extends State<KenaliScreen> {
           padding: const EdgeInsets.all(16.0),
           child: Column(
             children: [
-              // 🔎 KOTAK CARIAN (YANG AWAK NAK UBAH)
               Container(
                 padding: const EdgeInsets.symmetric(horizontal: 15),
                 decoration: BoxDecoration(
@@ -157,14 +156,12 @@ class _KenaliScreenState extends State<KenaliScreen> {
               // 📋 SENARAI GRID (AKAN BERUBAH IKUT CARIAN)
               Expanded(
                 child: hasilCarian.isEmpty
-                    // Kalau tak jumpa apa-apa
                     ? const Center(
                         child: Text(
                           "Topik tidak dijumpai 😔",
                           style: TextStyle(fontSize: 20, color: Colors.grey),
                         ),
                       )
-                    // Kalau ada hasil, tunjuk dalam grid
                     : GridView.count(
                         crossAxisCount: 2,
                         crossAxisSpacing: 20,
@@ -190,7 +187,6 @@ class _KenaliScreenState extends State<KenaliScreen> {
     );
   }
 
-  // Fungsi untuk bina kotak menu
   Widget _buildMenuCard(
     BuildContext context,
     String title,
