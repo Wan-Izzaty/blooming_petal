@@ -1,15 +1,15 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
-import 'firebase_options.dart';
-import 'login_screen.dart';
+//import 'package:firebase_core/firebase_core.dart';
+//import 'firebase_options.dart';
+//import 'login_screen.dart';
 import 'navigation_screen.dart';
 
-void main() async {
-  WidgetsFlutterBinding.ensureInitialized();
-  await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
+//void main() async {
+//WidgetsFlutterBinding.ensureInitialized();
+//await Firebase.initializeApp(options: DefaultFirebaseOptions.currentPlatform);
 
-  runApp(const BloomingPetalsApp());
-}
+//runApp(const BloomingPetalsApp());
+//}
 
 class BloomingPetalsApp extends StatelessWidget {
   const BloomingPetalsApp({super.key});
@@ -23,7 +23,6 @@ class BloomingPetalsApp extends StatelessWidget {
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.pink),
       ),
 
-      // ✅ UBAH SINI: DARI NavigationScreen -> LoginScreen
       home: const NavigationScreen(),
     );
   }

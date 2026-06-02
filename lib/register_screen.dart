@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'login_screen.dart';
+//import 'login_screen.dart';
 import 'home_screen.dart'; // ✅ Lepas daftar terus ke HOME
 import 'background_screen.dart'; // ✅ Background sama
 
@@ -19,13 +19,12 @@ class _RegisterScreenState extends State<RegisterScreen> {
   final _passController = TextEditingController();
   final _confirmPassController = TextEditingController();
 
-  String? _periodStatus; // Simpan "Yes" atau "No"
+  String? _periodStatus;
   bool _loading = false;
   final _auth = FirebaseAuth.instance;
   final _db = FirebaseFirestore.instance;
 
   Future<void> _daftarAkaun() async {
-    // 🛑 SEMAK BORANG
     if (_nameController.text.isEmpty ||
         _ageController.text.isEmpty ||
         _emailController.text.isEmpty ||
@@ -51,13 +50,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
 
     setState(() => _loading = true);
     try {
-      // 1. Daftar akaun
       UserCredential userCred = await _auth.createUserWithEmailAndPassword(
         email: _emailController.text.trim(),
         password: _passController.text.trim(),
       );
 
-      // 2. Simpan data ke database
       await _db.collection("users").doc(userCred.user?.uid).set({
         "fullname": _nameController.text.trim(),
         "age": int.parse(_ageController.text.trim()),
@@ -66,7 +63,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
         "created_at": FieldValue.serverTimestamp(),
       });
 
-      // 3. ✅ BERJAYA -> MASUK KE HOME SCREEN
       if (mounted) {
         ScaffoldMessenger.of(context).showSnackBar(
           const SnackBar(
@@ -112,7 +108,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SizedBox(height: 10),
-                // 🌸 TAJUK
                 const Text(
                   "BLOOMING PETAL",
                   style: TextStyle(
@@ -122,12 +117,11 @@ class _RegisterScreenState extends State<RegisterScreen> {
                   ),
                 ),
                 const Text(
-                  "Track Your Flow Here",
+                  "Belajar tentang Periodhood disini",
                   style: TextStyle(fontSize: 14, color: Colors.black54),
                 ),
                 const SizedBox(height: 30),
 
-                // ✏️ NAMA PENUH
                 TextField(
                   controller: _nameController,
                   decoration: const InputDecoration(
@@ -142,7 +136,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 const SizedBox(height: 15),
 
-                // 🎂 UMUR
                 TextField(
                   controller: _ageController,
                   decoration: const InputDecoration(
@@ -158,7 +151,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 const SizedBox(height: 15),
 
-                // 📧 EMAIL
                 TextField(
                   controller: _emailController,
                   decoration: const InputDecoration(
@@ -174,7 +166,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 const SizedBox(height: 15),
 
-                // 🔒 KATA LALUAN
                 TextField(
                   controller: _passController,
                   decoration: const InputDecoration(
@@ -190,7 +181,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 const SizedBox(height: 15),
 
-                // 🔒 SAHKAN KATA LALUAN
                 TextField(
                   controller: _confirmPassController,
                   decoration: const InputDecoration(
@@ -206,7 +196,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 const SizedBox(height: 20),
 
-                // ❓ SOALAN: Dah dapat haid ke belum?
                 const Align(
                   alignment: Alignment.centerLeft,
                   child: Text(
@@ -238,11 +227,9 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 const SizedBox(height: 20),
 
-                // 🌸 HIASAN BUNGA
                 const Icon(Icons.local_florist, size: 60, color: Colors.pink),
                 const SizedBox(height: 20),
 
-                // 🔘 BUTANG SIGN UP
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
@@ -263,7 +250,6 @@ class _RegisterScreenState extends State<RegisterScreen> {
                 ),
                 const SizedBox(height: 20),
 
-                // 🔗 KE LOGIN
                 TextButton(
                   onPressed: () {
                     Navigator.pop(context);

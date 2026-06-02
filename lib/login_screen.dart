@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:firebase_core/firebase_core.dart';
+//import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'register_screen.dart';
-import 'home_screen.dart'; // ✅ Masuk ke HOME lepas berjaya
-import 'background_screen.dart'; // ✅ Guna background sama
+import 'home_screen.dart';
+import 'background_screen.dart';
 
 class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
@@ -25,7 +25,6 @@ class _LoginScreenState extends State<LoginScreen> {
         email: _emailController.text.trim(),
         password: _passController.text.trim(),
       );
-      // ✅ BERJAYA -> MASUK KE HOME SCREEN
       if (mounted) {
         Navigator.pushReplacement(
           context,
@@ -47,7 +46,6 @@ class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     return BackgroundWrapper(
-      // ✅ GUNA BACKGROUND SAMA
       child: Scaffold(
         backgroundColor: Colors.transparent, // ✅ Biar background nampak
         body: SingleChildScrollView(
@@ -58,7 +56,6 @@ class _LoginScreenState extends State<LoginScreen> {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: [
                 const SizedBox(height: 20),
-                // 🌸 TAJUK
                 const Text(
                   "BLOOMING PETAL",
                   style: TextStyle(
@@ -73,7 +70,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 40),
 
-                // 📧 EMAIL
                 TextField(
                   controller: _emailController,
                   decoration: const InputDecoration(
@@ -91,7 +87,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 20),
 
-                // 🔒 PASSWORD
                 TextField(
                   controller: _passController,
                   decoration: const InputDecoration(
@@ -120,11 +115,9 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 30),
 
-                // 🌸 BUNGA HIASAN
                 const Icon(Icons.local_florist, size: 80, color: Colors.pink),
                 const SizedBox(height: 40),
 
-                // 🔘 BUTANG LOGIN
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton(
@@ -145,7 +138,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 15),
 
-                // 🔘 BUTANG GOOGLE
                 SizedBox(
                   width: double.infinity,
                   child: ElevatedButton.icon(
@@ -170,7 +162,6 @@ class _LoginScreenState extends State<LoginScreen> {
                 ),
                 const SizedBox(height: 30),
 
-                // 🔗 KE PAGE DAFTAR
                 TextButton(
                   onPressed: () {
                     Navigator.push(
